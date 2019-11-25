@@ -1,9 +1,12 @@
 package com.zhk.login;
 
 import com.zhk.main.student.StudentDialog;
+import com.zhk.main.teacher.TeacherDialog;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
+import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author 赵洪苛
@@ -28,6 +31,8 @@ public class LoginDialog extends JFrame implements LoginView {
         getRootPane().setDefaultButton(okButton);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        okButton.setForeground(Color.WHITE);
+        okButton.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.blue));
         okButton.addActionListener(event -> {
             String account = accountTxtField.getText();
             String password = passwordTxtField.getText();
@@ -47,7 +52,9 @@ public class LoginDialog extends JFrame implements LoginView {
 
     @Override
     public void showError(String msg) {
-        JOptionPane.showMessageDialog(this, msg, "警告", JOptionPane.ERROR_MESSAGE);
+        SwingUtilities.invokeLater(() -> {
+            JOptionPane.showMessageDialog(this, msg, "警告", JOptionPane.ERROR_MESSAGE);
+        });
     }
 
     @Override
@@ -55,17 +62,21 @@ public class LoginDialog extends JFrame implements LoginView {
         // 退出消费者线程，使用事件分发者线程更新UI
         SwingUtilities.invokeLater(() -> {
             this.dispose();
-            StudentDialog studentDialog = new StudentDialog(loginBean);
-            studentDialog.setSize(800, 600);
-            studentDialog.setLocationRelativeTo(null);
-            studentDialog.setVisible(true);
+            if (loginBean.getType() == LoginBean.STUDENT) {
+                StudentDialog studentDialog = new StudentDialog(loginBean);
+                studentDialog.setVisible(true);
+            } else {
+                TeacherDialog teacherDialog = new TeacherDialog(loginBean);
+                teacherDialog.setVisible(true);
+            }
         });
     }
 
     public static void main(String[] args) {
         // 使用美化包进行界面美化
         try {
-            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
+            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
+            UIManager.put("RootPane.setupButtonVisible",false);
             BeautyEyeLNFHelper.launchBeautyEyeLNF();
         } catch (Exception e) {
             e.printStackTrace();

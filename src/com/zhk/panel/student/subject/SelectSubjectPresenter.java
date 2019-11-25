@@ -17,6 +17,7 @@ public class SelectSubjectPresenter extends BasePresenter<SelectSubjectView> {
 
     /**
      * @see SelectSubjectModel#select(LoginBean, BaseCallBack)
+     * @param loginBean 账号信息
      */
     public void select(LoginBean loginBean) {
         model.select(loginBean, new BaseCallBack<List<SubjectBean>>() {

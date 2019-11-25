@@ -15,15 +15,20 @@ import java.util.List;
  */
 public class SubjectAdapter extends AbstractTableModel {
 
-    private String[] columnNames = new String[]{"课题代码", "课题主管学院", "课题名称", "指导教师工号", "指导教师姓名", "指导教师职称", "该课题可接收总人数", "该课题已接收人数", "该课题待确认人数", "操作"};
+    private String[] columnNames = new String[]{"课题代码", "课题主管学院", "课题名称", "指导教师工号", "指导教师姓名", "指导教师职称", "可接收总人数", "已接收人数", "待确认人数", "状态", "操作"};
     private List<SubjectBean> subjectBeans;
     private StudentBean studentBean = new StudentBean();
 
-    private int selectRowIndex = -1;
-    private static final int OPERATE_COLUMN = 9;
+    private String selectedCode;
+    private static final int OPERATE_COLUMN = 10;
 
     public void setSubjectBeans(List<SubjectBean> subjectBeans) {
         this.subjectBeans = subjectBeans;
+        subjectBeans.forEach(subjectBean -> {
+            if (subjectBean.getState() != MatchBean.NONE) {
+                selectedCode = subjectBean.getCode();
+            }
+        });
     }
 
     public void setStudentBean(LoginBean loginBean) {
@@ -45,7 +50,7 @@ public class SubjectAdapter extends AbstractTableModel {
         // 当前为操作列
         if (columnIndex == OPERATE_COLUMN) {
             // 当前列表一个课题都未选或当前是已选课题行，即可对按钮进行操作
-            return selectRowIndex < 0 || rowIndex == selectRowIndex;
+            return selectedCode == null || selectedCode.isEmpty() || selectedCode.equals(subjectBeans.get(rowIndex).getCode());
         }
         return false;
     }
@@ -54,17 +59,20 @@ public class SubjectAdapter extends AbstractTableModel {
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         if (columnIndex == OPERATE_COLUMN) {
             int state = (int) value;
+            if (state == subjectBeans.get(rowIndex).getState()) {
+                return;
+            }
             MatchBean matchBean = new MatchBean();
             matchBean.setSubjectBean(subjectBeans.get(rowIndex));
             matchBean.setStudentBean(studentBean);
             if (state == MatchBean.ACCEPTED || state == MatchBean.CONFIRMING) {
                 // 选择该课题
-                selectRowIndex = rowIndex;
+                selectedCode = subjectBeans.get(rowIndex).getCode();
                 matchBean.setState(MatchBean.CONFIRMING);
                 EventCenter.dispatchEvent(Events.INSERT_MATCH, 0, 0, matchBean);
             } else {
                 // 退选该课题
-                selectRowIndex = -1;
+                selectedCode = null;
                 matchBean.setState(MatchBean.NONE);
                 EventCenter.dispatchEvent(Events.CANCEL_MATCH, 0, 0, matchBean);
             }
@@ -96,6 +104,14 @@ public class SubjectAdapter extends AbstractTableModel {
             case 8:
                 return subjectBeans.get(rowIndex).getConfirmingNum();
             case 9:
+                if (subjectBeans.get(rowIndex).getState() == MatchBean.CONFIRMING) {
+                    return "待确认";
+                } else if (subjectBeans.get(rowIndex).getState() == MatchBean.ACCEPTED) {
+                    return "已确认";
+                } else {
+                    return "未选";
+                }
+            case 10:
                 return subjectBeans.get(rowIndex).getState();
             default:
                 return null;

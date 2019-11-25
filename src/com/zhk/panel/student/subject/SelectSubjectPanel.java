@@ -4,6 +4,7 @@ import com.zhk.event.EventCenter;
 import com.zhk.event.EventListener;
 import com.zhk.event.Events;
 import com.zhk.login.LoginBean;
+import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,8 +43,8 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         subjectAdapter = new SubjectAdapter();
         subjectAdapter.setStudentBean(loginBean);
         table = new JTable(subjectAdapter);
-        table.getColumnModel().getColumn(9).setCellEditor(new ButtonEditor());
-        table.getColumnModel().getColumn(9).setCellRenderer(new ButtonRender());
+        table.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor());
+        table.getColumnModel().getColumn(10).setCellRenderer(new ButtonRender());
         table.setRowHeight(25);
         scrollPane.setViewportView(table);
 

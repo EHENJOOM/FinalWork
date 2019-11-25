@@ -15,9 +15,19 @@ public class TeacherBean {
     private String sex;
     // 教师职称
     private String jobTitle;
+    // 教师所属学院
+    private String ofAcademy;
 
     public String getNumber() {
         return number;
+    }
+
+    public void setOfAcademy(String ofAcademy) {
+        this.ofAcademy = ofAcademy;
+    }
+
+    public String getOfAcademy() {
+        return ofAcademy;
     }
 
     public void setNumber(String number) {

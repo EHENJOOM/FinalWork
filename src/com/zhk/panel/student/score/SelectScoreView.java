@@ -11,6 +11,10 @@ import java.util.List;
  */
 public interface SelectScoreView extends BaseView {
 
+    /**
+     * 更新jtable表
+     * @param list 数据集
+     */
     void update(List<ScoreBean> list);
 
 }
