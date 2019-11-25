@@ -1,5 +1,6 @@
 package com.zhk.panel.student.subject;
 
+import com.zhk.contant.Config;
 import com.zhk.event.EventCenter;
 import com.zhk.event.Events;
 import com.zhk.login.LoginBean;
@@ -13,7 +14,7 @@ import java.util.List;
  * @date 2019/11/23 18:06
  * @description JTable课题表适配器
  */
-public class SubjectAdapter extends AbstractTableModel {
+public class SelectSubjectAdapter extends AbstractTableModel {
 
     private String[] columnNames = new String[]{"课题代码", "课题主管学院", "课题名称", "指导教师工号", "指导教师姓名", "指导教师职称", "可接收总人数", "已接收人数", "待确认人数", "状态", "操作"};
     private List<SubjectBean> subjectBeans;
@@ -25,7 +26,7 @@ public class SubjectAdapter extends AbstractTableModel {
     public void setSubjectBeans(List<SubjectBean> subjectBeans) {
         this.subjectBeans = subjectBeans;
         subjectBeans.forEach(subjectBean -> {
-            if (subjectBean.getState() != MatchBean.NONE) {
+            if (subjectBean.getState() != Config.UNSELECTED_SUBJECT) {
                 selectedCode = subjectBean.getCode();
             }
         });
@@ -65,15 +66,15 @@ public class SubjectAdapter extends AbstractTableModel {
             MatchBean matchBean = new MatchBean();
             matchBean.setSubjectBean(subjectBeans.get(rowIndex));
             matchBean.setStudentBean(studentBean);
-            if (state == MatchBean.ACCEPTED || state == MatchBean.CONFIRMING) {
+            if (state == Config.ACCEPTED_SUBJECT || state == Config.CONFIRMING_SUBJECT) {
                 // 选择该课题
                 selectedCode = subjectBeans.get(rowIndex).getCode();
-                matchBean.setState(MatchBean.CONFIRMING);
+                matchBean.setState(Config.CONFIRMING_SUBJECT);
                 EventCenter.dispatchEvent(Events.INSERT_MATCH, 0, 0, matchBean);
             } else {
                 // 退选该课题
                 selectedCode = null;
-                matchBean.setState(MatchBean.NONE);
+                matchBean.setState(Config.UNSELECTED_SUBJECT);
                 EventCenter.dispatchEvent(Events.CANCEL_MATCH, 0, 0, matchBean);
             }
         }
@@ -104,9 +105,9 @@ public class SubjectAdapter extends AbstractTableModel {
             case 8:
                 return subjectBeans.get(rowIndex).getConfirmingNum();
             case 9:
-                if (subjectBeans.get(rowIndex).getState() == MatchBean.CONFIRMING) {
+                if (subjectBeans.get(rowIndex).getState() == Config.CONFIRMING_SUBJECT) {
                     return "待确认";
-                } else if (subjectBeans.get(rowIndex).getState() == MatchBean.ACCEPTED) {
+                } else if (subjectBeans.get(rowIndex).getState() == Config.ACCEPTED_SUBJECT) {
                     return "已确认";
                 } else {
                     return "未选";

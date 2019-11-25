@@ -16,4 +16,6 @@ public class Events {
      */
     public static final String CANCEL_MATCH = "cancel_match";
 
+    public static final String CHANGE_SUBJECT = "change_subject";
+
 }

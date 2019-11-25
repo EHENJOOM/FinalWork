@@ -19,21 +19,6 @@ public class MatchBean {
     // 事件唯一Id
     private int id;
 
-    /**
-     * 该课题选择成功
-     */
-    public static final int ACCEPTED = 1;
-
-    /**
-     * 正在等待管理员确认该课题是否选择成功
-     */
-    public static final int CONFIRMING = 2;
-
-    /**
-     * 未选择该课题或取消选择该课题
-     */
-    public static final int NONE = 0;
-
     public MatchBean() {}
 
     public MatchBean(int id, StudentBean studentBean, SubjectBean subjectBean, int state) {

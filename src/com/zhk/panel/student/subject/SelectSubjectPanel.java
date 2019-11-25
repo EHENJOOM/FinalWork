@@ -4,7 +4,6 @@ import com.zhk.event.EventCenter;
 import com.zhk.event.EventListener;
 import com.zhk.event.Events;
 import com.zhk.login.LoginBean;
-import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class SelectSubjectPanel extends JPanel implements SelectSubjectView, EventListener {
 
-    private SubjectAdapter subjectAdapter;
+    private SelectSubjectAdapter selectSubjectAdapter;
     private JTable table;
     private JComboBox<String> ofAcademyCombo;
     private JTextField subjectTextField;
@@ -40,11 +39,11 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         setLayout(new BorderLayout());
 
         JScrollPane scrollPane = new JScrollPane();
-        subjectAdapter = new SubjectAdapter();
-        subjectAdapter.setStudentBean(loginBean);
-        table = new JTable(subjectAdapter);
-        table.getColumnModel().getColumn(10).setCellEditor(new ButtonEditor());
-        table.getColumnModel().getColumn(10).setCellRenderer(new ButtonRender());
+        selectSubjectAdapter = new SelectSubjectAdapter();
+        selectSubjectAdapter.setStudentBean(loginBean);
+        table = new JTable(selectSubjectAdapter);
+        table.getColumnModel().getColumn(10).setCellEditor(new SelectButtonEditor());
+        table.getColumnModel().getColumn(10).setCellRenderer(new SelectButtonRender());
         table.setRowHeight(25);
         scrollPane.setViewportView(table);
 
@@ -106,7 +105,7 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         if (list.size() == 0) {
             JOptionPane.showMessageDialog(this, "没有找到匹配的课题！", "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            subjectAdapter.setSubjectBeans(list);
+            selectSubjectAdapter.setSubjectBeans(list);
             table.updateUI();
         }
     }
@@ -115,7 +114,7 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
     public void update(List<SubjectBean> subjectBeans) {
         SwingUtilities.invokeLater(() -> {
             this.subjectBeans = subjectBeans;
-            subjectAdapter.setSubjectBeans(subjectBeans);
+            selectSubjectAdapter.setSubjectBeans(subjectBeans);
             table.updateUI();
         });
     }

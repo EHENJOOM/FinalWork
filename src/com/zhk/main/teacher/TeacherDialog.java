@@ -1,6 +1,7 @@
 package com.zhk.main.teacher;
 
 import com.zhk.login.LoginBean;
+import com.zhk.panel.teacher.subject.EditSubjectPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,9 +39,10 @@ public class TeacherDialog extends JFrame {
         selectMenu.add(showInfoMenuItem);
 
         JMenu graduateMenu = new JMenu("毕业设计");
-        JMenuItem addSubjectMenuItem = new JMenuItem("增加课题");
+        JMenuItem editSubjectMenuItem = new JMenuItem("编辑课题");
         JMenuItem checkSubjectMenuItem = new JMenuItem("确认学生课题");
-        graduateMenu.add(addSubjectMenuItem);
+        editSubjectMenuItem.addActionListener(event -> showEditSubject());
+        graduateMenu.add(editSubjectMenuItem);
         graduateMenu.addSeparator();
         graduateMenu.add(checkSubjectMenuItem);
 
@@ -54,6 +56,13 @@ public class TeacherDialog extends JFrame {
         menuBar.add(graduateMenu);
         menuBar.add(helpMenu);
         setJMenuBar(menuBar);
+    }
+
+    private void showEditSubject() {
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        mainPanel.add(new EditSubjectPanel(loginBean), BorderLayout.CENTER);
+        mainPanel.revalidate();
     }
 
 }

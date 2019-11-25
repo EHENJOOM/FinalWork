@@ -1,5 +1,7 @@
 package com.zhk.panel.student.subject;
 
+import com.zhk.contant.Config;
+
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
@@ -9,23 +11,23 @@ import java.awt.*;
  * @date 2019/11/23 20:28
  * @description 选课题按钮编辑器
  */
-public class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
+public class SelectButtonEditor extends AbstractCellEditor implements TableCellEditor {
 
     private JButton selectButton;
     // 0代表还未选课题
-    private int state = MatchBean.NONE;
+    private int state = Config.UNSELECTED_SUBJECT;
 
-    public ButtonEditor() {
+    public SelectButtonEditor() {
         selectButton = new JButton("选择");
         selectButton.addActionListener(event -> {
-            if (state == MatchBean.NONE) {
+            if (state == Config.UNSELECTED_SUBJECT) {
                 // 用户按下确认键
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "是否确认选择该课题？", "请确认", JOptionPane.YES_NO_OPTION)) {
-                    state = MatchBean.CONFIRMING;
+                    state = Config.CONFIRMING_SUBJECT;
                 }
             } else {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "是否确认退选该课题？", "请确认", JOptionPane.YES_NO_OPTION)) {
-                    state = MatchBean.NONE;
+                    state = Config.UNSELECTED_SUBJECT;
                 }
             }
             fireEditingStopped();

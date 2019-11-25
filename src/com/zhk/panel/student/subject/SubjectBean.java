@@ -18,6 +18,8 @@ public class SubjectBean {
     // 课题代码
     private String code;
 
+    private int id;
+
     // 当前学生对该课题的状态
     private int state;
 
@@ -32,6 +34,14 @@ public class SubjectBean {
 
     // 指导教师信息
     private TeacherBean teacherBean;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public void setName(String name) {
         this.name = name;
