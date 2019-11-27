@@ -1,6 +1,6 @@
 package com.zhk.panel.student.subject;
 
-import com.zhk.contant.Config;
+import com.zhk.constant.Config;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;

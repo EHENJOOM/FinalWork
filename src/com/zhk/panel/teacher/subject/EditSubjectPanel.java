@@ -1,5 +1,6 @@
 package com.zhk.panel.teacher.subject;
 
+import com.zhk.constant.Config;
 import com.zhk.event.EventCenter;
 import com.zhk.event.EventListener;
 import com.zhk.event.Events;
@@ -19,7 +20,6 @@ import java.util.List;
  */
 public class EditSubjectPanel extends JPanel implements EditSubjectView, EventListener {
 
-    private LoginBean loginBean;
     private List<SubjectBean> subjectBeans;
     private EditSubjectPresenter presenter  = new EditSubjectPresenter();
 
@@ -28,7 +28,6 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
     private JPopupMenu popupMenu;
 
     public EditSubjectPanel(LoginBean loginBean) {
-        this.loginBean = loginBean;
         initView();
         createPopupMenu();
         presenter.attachView(this);
@@ -70,12 +69,17 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
         deleteMenuItem.addActionListener(event -> {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "是否删除此课题？", "提示", JOptionPane.YES_NO_OPTION)) {
                 int row = table.getSelectedRow();
-                presenter.delete(row, subjectBeans.get(row));
+                if (subjectBeans.get(row).getId() == 0) {
+                    subjectBeans.remove(row);
+                } else {
+                    presenter.delete(row, subjectBeans.get(row));
+                }
             }
         });
         JMenuItem addMenuItem = new JMenuItem("新建空行");
         addMenuItem.addActionListener(event -> {
             SubjectBean subjectBean = new SubjectBean();
+            subjectBean.setState(Config.UNCHANGED_INFO);
             subjectBeans.add(subjectBean);
             table.updateUI();
         });

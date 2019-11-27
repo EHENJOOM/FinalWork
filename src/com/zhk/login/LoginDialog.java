@@ -1,12 +1,16 @@
 package com.zhk.login;
 
+import com.zhk.constant.Config;
 import com.zhk.main.student.StudentDialog;
 import com.zhk.main.teacher.TeacherDialog;
+import com.zhk.register.RegisterDialog;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * @author 赵洪苛
@@ -18,6 +22,8 @@ public class LoginDialog extends JFrame implements LoginView {
     private JTextField accountTxtField;
     private JTextField passwordTxtField;
     private JButton okButton;
+    private JLabel registerLabel;
+    private JLabel forgetLabel;
 
     private LoginPresenter loginPresenter = new LoginPresenter();
 
@@ -28,6 +34,9 @@ public class LoginDialog extends JFrame implements LoginView {
 
     private void initView() {
         setContentPane(contentPane);
+        setSize(350, 280);
+        setLocationRelativeTo(null);
+        setTitle("毕业论文课题管理系统");
         getRootPane().setDefaultButton(okButton);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -47,6 +56,23 @@ public class LoginDialog extends JFrame implements LoginView {
             }
 
             loginPresenter.login(new LoginBean(account, password));
+        });
+
+        registerLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+                RegisterDialog dialog = new RegisterDialog(Config.REGISTER_DIALOG);
+                dialog.setVisible(true);
+            }
+        });
+        forgetLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+                RegisterDialog dialog = new RegisterDialog(Config.FORGET_PASSWORD_DIALOG);
+                dialog.setVisible(true);
+            }
         });
     }
 
@@ -83,9 +109,6 @@ public class LoginDialog extends JFrame implements LoginView {
         }
 
         LoginDialog dialog = new LoginDialog();
-        dialog.setSize(350, 280);
-        dialog.setLocationRelativeTo(null);
-        dialog.setTitle("毕业论文课题管理系统");
         dialog.setVisible(true);
     }
 

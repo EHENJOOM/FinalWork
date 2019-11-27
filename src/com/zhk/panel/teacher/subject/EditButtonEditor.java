@@ -1,6 +1,6 @@
 package com.zhk.panel.teacher.subject;
 
-import com.zhk.contant.Config;
+import com.zhk.constant.Config;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;

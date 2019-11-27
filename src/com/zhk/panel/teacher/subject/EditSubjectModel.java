@@ -1,7 +1,6 @@
 package com.zhk.panel.teacher.subject;
 
-import com.zhk.contant.Config;
-import com.zhk.db.ConnectionPool;
+import com.zhk.constant.Config;
 import com.zhk.db.ConnectionPoolEnum;
 import com.zhk.login.LoginBean;
 import com.zhk.mvp.BaseCallBack;

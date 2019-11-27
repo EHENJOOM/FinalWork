@@ -17,8 +17,8 @@ public class EditSubjectPresenter extends BasePresenter<EditSubjectView> {
     private EditSubjectModel model = new EditSubjectModel();
 
     /**
-     *
-     * @param loginBean
+     * @see EditSubjectModel#select(LoginBean, BaseCallBack)
+     * @param loginBean 账户信息
      */
     public void select(LoginBean loginBean) {
         model.select(loginBean, new BaseCallBack<List<SubjectBean>>() {
@@ -39,8 +39,8 @@ public class EditSubjectPresenter extends BasePresenter<EditSubjectView> {
     }
 
     /**
-     *
-     * @param subjectBean
+     * @see EditSubjectModel#update(SubjectBean, BaseCallBack)
+     * @param subjectBean 需要更新的数据
      */
     public void update(SubjectBean subjectBean) {
         model.update(subjectBean, new BaseCallBack<String>() {
@@ -61,8 +61,8 @@ public class EditSubjectPresenter extends BasePresenter<EditSubjectView> {
     }
 
     /**
-     *
-     * @param subjectBean
+     * @see EditSubjectModel#delete(SubjectBean, BaseCallBack)
+     * @param subjectBean 需要删除的数据
      */
     public void delete(int row, SubjectBean subjectBean) {
         model.delete(subjectBean, new BaseCallBack<String>() {

@@ -1,6 +1,7 @@
 package com.zhk.panel.student.subject;
 
 import com.zhk.main.student.StudentBean;
+import com.zhk.main.teacher.TeacherBean;
 
 /**
  * @author 赵洪苛
@@ -12,6 +13,8 @@ public class MatchBean {
     private StudentBean studentBean;
 
     private SubjectBean subjectBean;
+
+    private TeacherBean teacherBean;
 
     // 学生选课题的状态
     private int state;
@@ -26,6 +29,14 @@ public class MatchBean {
         this.state = state;
         this.studentBean = studentBean;
         this.subjectBean = subjectBean;
+    }
+
+    public TeacherBean getTeacherBean() {
+        return teacherBean;
+    }
+
+    public void setTeacherBean(TeacherBean teacherBean) {
+        this.teacherBean = teacherBean;
     }
 
     public int getId() {

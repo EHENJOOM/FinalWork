@@ -36,6 +36,7 @@ public class SelectSubjectModel {
                 ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
                     SubjectBean subjectBean = new SubjectBean();
+                    subjectBean.setId(resultSet.getInt("id"));
                     subjectBean.setCode(resultSet.getString("code"));
                     subjectBean.setName(resultSet.getString("name"));
                     subjectBean.setOfAcademy(resultSet.getString("academy"));

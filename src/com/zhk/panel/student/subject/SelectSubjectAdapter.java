@@ -1,6 +1,6 @@
 package com.zhk.panel.student.subject;
 
-import com.zhk.contant.Config;
+import com.zhk.constant.Config;
 import com.zhk.event.EventCenter;
 import com.zhk.event.Events;
 import com.zhk.login.LoginBean;
@@ -20,14 +20,14 @@ public class SelectSubjectAdapter extends AbstractTableModel {
     private List<SubjectBean> subjectBeans;
     private StudentBean studentBean = new StudentBean();
 
-    private String selectedCode;
+    private int selectedId = -1;
     private static final int OPERATE_COLUMN = 10;
 
     public void setSubjectBeans(List<SubjectBean> subjectBeans) {
         this.subjectBeans = subjectBeans;
         subjectBeans.forEach(subjectBean -> {
             if (subjectBean.getState() != Config.UNSELECTED_SUBJECT) {
-                selectedCode = subjectBean.getCode();
+                selectedId = subjectBean.getId();
             }
         });
     }
@@ -51,7 +51,7 @@ public class SelectSubjectAdapter extends AbstractTableModel {
         // 当前为操作列
         if (columnIndex == OPERATE_COLUMN) {
             // 当前列表一个课题都未选或当前是已选课题行，即可对按钮进行操作
-            return selectedCode == null || selectedCode.isEmpty() || selectedCode.equals(subjectBeans.get(rowIndex).getCode());
+            return selectedId == -1 || selectedId == subjectBeans.get(rowIndex).getId();
         }
         return false;
     }
@@ -68,12 +68,12 @@ public class SelectSubjectAdapter extends AbstractTableModel {
             matchBean.setStudentBean(studentBean);
             if (state == Config.ACCEPTED_SUBJECT || state == Config.CONFIRMING_SUBJECT) {
                 // 选择该课题
-                selectedCode = subjectBeans.get(rowIndex).getCode();
+                selectedId = subjectBeans.get(rowIndex).getId();
                 matchBean.setState(Config.CONFIRMING_SUBJECT);
                 EventCenter.dispatchEvent(Events.INSERT_MATCH, 0, 0, matchBean);
             } else {
                 // 退选该课题
-                selectedCode = null;
+                selectedId = -1;
                 matchBean.setState(Config.UNSELECTED_SUBJECT);
                 EventCenter.dispatchEvent(Events.CANCEL_MATCH, 0, 0, matchBean);
             }
