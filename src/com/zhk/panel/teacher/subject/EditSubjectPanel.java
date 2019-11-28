@@ -6,6 +6,7 @@ import com.zhk.event.EventListener;
 import com.zhk.event.Events;
 import com.zhk.login.LoginBean;
 import com.zhk.panel.student.subject.SubjectBean;
+import com.zhk.panel.teacher.info.student.ComboBoxEditor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,6 +42,8 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
         JScrollPane scrollPane = new JScrollPane();
         adapter = new EditSubjectAdapter();
         table = new JTable(adapter);
+        String[] academy = new String[]{"经济管理学院", "信息科技与技术学院", "马克思主义学院", "文法学院"};
+        table.getColumnModel().getColumn(1).setCellEditor(new ComboBoxEditor(academy));
         table.getColumnModel().getColumn(6).setCellEditor(new EditButtonEditor());
         table.getColumnModel().getColumn(6).setCellRenderer(new EditButtonRender());
         scrollPane.setViewportView(table);
@@ -71,6 +74,7 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
                 int row = table.getSelectedRow();
                 if (subjectBeans.get(row).getId() == 0) {
                     subjectBeans.remove(row);
+                    table.updateUI();
                 } else {
                     presenter.delete(row, subjectBeans.get(row));
                 }
@@ -79,6 +83,7 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
         JMenuItem addMenuItem = new JMenuItem("新建空行");
         addMenuItem.addActionListener(event -> {
             SubjectBean subjectBean = new SubjectBean();
+            subjectBean.setId(0);
             subjectBean.setState(Config.UNCHANGED_INFO);
             subjectBeans.add(subjectBean);
             table.updateUI();
@@ -107,14 +112,18 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
 
     @Override
     public void showMessage(String msg) {
-        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, msg, "提示", JOptionPane.YES_OPTION));
+        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, msg, "提示", JOptionPane.INFORMATION_MESSAGE));
     }
 
     @Override
     public void onEvent(String topic, int msgCode, int resultCode, Object object) {
         switch (topic) {
             case Events.CHANGE_SUBJECT:
-                presenter.update((SubjectBean) object);
+                if (((SubjectBean) object).getId() == 0) {
+                    presenter.insert((SubjectBean) object);
+                } else {
+                    presenter.update((SubjectBean) object);
+                }
                 break;
             default:
                 break;

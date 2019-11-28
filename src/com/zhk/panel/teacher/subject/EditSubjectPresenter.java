@@ -83,4 +83,26 @@ public class EditSubjectPresenter extends BasePresenter<EditSubjectView> {
         });
     }
 
+    /**
+     * @see EditSubjectModel#insert(SubjectBean, BaseCallBack)
+     * @param subjectBean 需要加入的数据
+     */
+    public void insert(SubjectBean subjectBean) {
+        model.insert(subjectBean, new BaseCallBack<String>() {
+            @Override
+            public void onSucceed(String data) {
+                if (isViewAttached()) {
+                    getView().showMessage(data);
+                }
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                if (isViewAttached()) {
+                    getView().showError(msg);
+                }
+            }
+        });
+    }
+
 }

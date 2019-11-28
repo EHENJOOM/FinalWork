@@ -50,12 +50,12 @@ public class Config {
     /**
      * 注册窗口
      */
-    public static final int REGISTER_DIALOG = 8;
+    public static final int REGISTER_DIALOG = 9;
 
     /**
      * 忘记密码窗口
      */
-    public static final int FORGET_PASSWORD_DIALOG = 9;
+    public static final int FORGET_PASSWORD_DIALOG = 10;
 
     /**
      * 发件人的邮箱地址和密码
@@ -73,7 +73,17 @@ public class Config {
     public static String SEND_EMAIL_SMTP_HOST = "smtp.qq.com";
 
     /**
-     * 收件人邮箱后缀，仅支持BUCTers注册
+     * BUCT收件人邮箱后缀，仅支持BUCTers注册
      */
-    public static String MAIL_ACCOUNT_SUFFIX = "@mail.buct.edu.cn";
+    public static String BUCT_MAIL_SUFFIX = "@mail.buct.edu.cn";
+
+    /**
+     * QQ邮箱后缀
+     */
+    public static String QQ_MAIL_SUFFIX = "@qq.com";
+
+    /**
+     * 网易邮箱后缀
+     */
+    public static String WANGYI_AIL_SUFFIX = "@163.com";
 }

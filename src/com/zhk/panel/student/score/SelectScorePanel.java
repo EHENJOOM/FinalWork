@@ -65,12 +65,13 @@ public class SelectScorePanel extends JPanel implements SelectScoreView {
         List<ScoreBean> list = scoreBeans;
         if (!teacher.isEmpty()) {
             list = list.parallelStream()
-                    .filter(scoreBean -> scoreBean.getTeacherBean().getName().equals(teacher))
+                    .filter(scoreBean -> scoreBean.getTeacherBean().getName().contains(teacher)
+                            || scoreBean.getTeacherBean().getName().equals(teacher))
                     .collect(Collectors.toList());
         }
         if (!course.isEmpty()) {
             list = list.parallelStream()
-                    .filter(scoreBean -> scoreBean.getName().equals(course))
+                    .filter(scoreBean -> scoreBean.getName().contains(course) || scoreBean.getName().equals(course))
                     .collect(Collectors.toList());
         }
 

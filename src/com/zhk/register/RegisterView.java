@@ -5,7 +5,7 @@ import com.zhk.mvp.BaseView;
 
 /**
  * @author 赵洪苛
- * @date 2019/11/26
+ * @date 2019/11/26 20:22
  * @description 注册或忘记密码视图器
  */
 public interface RegisterView extends BaseView {

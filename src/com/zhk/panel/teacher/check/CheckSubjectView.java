@@ -18,4 +18,17 @@ public interface CheckSubjectView extends BaseView {
      */
     void update(List<MatchBean> matchBeans);
 
+    /**
+     *
+     * @param msg
+     * @param data
+     */
+    void showMessage(String msg, MatchBean data);
+
+    /**
+     *
+     * @param matchBean
+     */
+    void resetState(MatchBean matchBean);
+
 }

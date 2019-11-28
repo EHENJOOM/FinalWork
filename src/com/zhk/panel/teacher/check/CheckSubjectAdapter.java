@@ -1,5 +1,8 @@
 package com.zhk.panel.teacher.check;
 
+import com.zhk.constant.Config;
+import com.zhk.event.EventCenter;
+import com.zhk.event.Events;
 import com.zhk.panel.student.subject.MatchBean;
 
 import javax.swing.table.AbstractTableModel;
@@ -15,7 +18,7 @@ public class CheckSubjectAdapter extends AbstractTableModel {
     private List<MatchBean> matchBeans;
 
     private String[] items = new String[]{"课题代码", "课题名称", "所属学院", "总接收人数", "已接收人数",
-            "待确认人数", "学生学号", "姓名", "性别", "学院", "专业", "班级", "接收", "拒绝"};
+            "待确认人数", "学生学号", "姓名", "性别", "学院", "专业", "班级", "状态", "接收", "拒绝"};
 
     public void setMatchBeans(List<MatchBean> matchBeans) {
         this.matchBeans = matchBeans;
@@ -34,9 +37,9 @@ public class CheckSubjectAdapter extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case 12:
             case 13:
-                return true;
+            case 14:
+                return matchBeans.get(rowIndex).getState() == Config.CONFIRMING_SUBJECT;
             default:
                 return false;
         }
@@ -45,9 +48,17 @@ public class CheckSubjectAdapter extends AbstractTableModel {
     @Override
     public void setValueAt(Object object, int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case 12:
-                break;
             case 13:
+                if ((boolean) object) {
+                    matchBeans.get(rowIndex).setState(Config.ACCEPTED_SUBJECT);
+                    EventCenter.dispatchEvent(Events.ACCEPT_STUDENT, 0, 0, matchBeans.get(rowIndex));
+                }
+                break;
+            case 14:
+                if ((boolean) object) {
+                    matchBeans.get(rowIndex).setState(Config.UNSELECTED_SUBJECT);
+                    EventCenter.dispatchEvent(Events.REFUSE_STUDENT, 0, 0, matchBeans.get(rowIndex));
+                }
                 break;
             default:
         }
@@ -81,6 +92,18 @@ public class CheckSubjectAdapter extends AbstractTableModel {
             case 11:
                 return String.format("%02d", matchBeans.get(rowIndex).getStudentBean().getGrade())
                         + String.format("%02d", matchBeans.get(rowIndex).getStudentBean().getClazz());
+            case 12:
+                if (matchBeans.get(rowIndex).getState() == Config.CONFIRMING_SUBJECT) {
+                    return "待确认";
+                } else if (matchBeans.get(rowIndex).getState() == Config.ACCEPTED_SUBJECT) {
+                    return "已接收";
+                } else if (matchBeans.get(rowIndex).getState() == Config.UNSELECTED_SUBJECT) {
+                    return "未选";
+                }
+            case 13:
+                return "接收";
+            case 14:
+                return "拒绝";
             default:
                 return null;
         }

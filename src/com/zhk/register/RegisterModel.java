@@ -2,9 +2,10 @@ package com.zhk.register;
 
 import com.zhk.constant.Config;
 import com.zhk.db.ConnectionPoolEnum;
+import com.zhk.email.EmailSender;
+import com.zhk.email.EmailSenderFactory;
 import com.zhk.login.LoginBean;
-import com.zhk.mail.EmailBean;
-import com.zhk.mail.EmailSenderEnum;
+import com.zhk.email.EmailBean;
 import com.zhk.mvp.BaseCallBack;
 import com.zhk.thread.ThreadPoolEnum;
 
@@ -19,7 +20,7 @@ import java.util.UUID;
 
 /**
  * @author 赵洪苛
- * @date 2019/11/26
+ * @date 2019/11/26 20:20
  * @description 注册或忘记密码数据处理器
  */
 public class RegisterModel {
@@ -37,23 +38,26 @@ public class RegisterModel {
             String verifyCode = UUID.randomUUID().toString();
             verifyCode = verifyCode.substring(2, 8);
             verifyMap.put(account, verifyCode);
+
             EmailBean emailBean = new EmailBean();
+            emailBean.setSuffix(Config.BUCT_MAIL_SUFFIX);
+            emailBean.setReceiveAccount(account);
+            emailBean.setDate(new Date());
             if (type == Config.REGISTER_DIALOG) {
                 emailBean.setSubject("注册账号验证码");
                 emailBean.setContent("用户" + account + "：\n\t您好！\n\t您正在使用“毕业课题管理系统”，您正在注册账号，现在是验证您的身份是否合法。\n\t您的验证码是 "
                         + verifyCode + " ，请不要将此验证码告知他人。\n\t此邮件为系统发送，请不要回复！\n谢谢！");
-                emailBean.setReceiveAccount(account);
-                emailBean.setDate(new Date());
             } else if (type == Config.FORGET_PASSWORD_DIALOG) {
                 emailBean.setSubject("忘记密码验证码");
-                emailBean.setContent("用户" + account + "\n\t您好！\n\t您正在使用“毕业课题管理系统”，您正在更改密码，现在是验证您的身份是否合法。\n\t您的验证码是 "
+                emailBean.setContent("用户" + account + "：\n\t您好！\n\t您正在使用“毕业课题管理系统”，您正在更改密码，现在是验证您的身份是否合法。\n\t您的验证码是 "
                         + verifyCode + " ，请不要将此验证码告知他人。\n\t此邮件为系统发送，请不要回复！\n谢谢！");
-                emailBean.setReceiveAccount(account);
-                emailBean.setDate(new Date());
             }
 
             try {
-                EmailSenderEnum.getInstance().init().setEmail(emailBean).sendMessage();
+                EmailSender emailSender = EmailSenderFactory.getDefaultEmailSender();
+                emailSender.init();
+                emailSender.setEmailContent(emailBean);
+                emailSender.sendMessage();
                 baseCallBack.onSucceed("验证码已发送，请前往您的邮箱查看！");
             } catch (Exception e) {
                 baseCallBack.onFailed("验证码发送失败，请稍后重试！");
@@ -126,8 +130,8 @@ public class RegisterModel {
 
     /**
      * 向数据库中写入新账户信息
-     * @param loginBean
-     * @param baseCallBack
+     * @param loginBean 账户信息
+     * @param baseCallBack 回调
      */
     public void register(LoginBean loginBean, BaseCallBack<LoginBean> baseCallBack) {
         ThreadPoolEnum.getInstance().execute(() -> {

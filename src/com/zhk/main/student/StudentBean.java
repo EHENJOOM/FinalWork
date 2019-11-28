@@ -25,6 +25,9 @@ public class StudentBean {
     // 学院
     private String academy;
 
+    // 用于信息修改时判断状态，不存入数据库
+    private int state;
+
     // 年级
     private int grade;
 
@@ -93,5 +96,13 @@ public class StudentBean {
 
     public void setClazz(int clazz) {
         this.clazz = clazz;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

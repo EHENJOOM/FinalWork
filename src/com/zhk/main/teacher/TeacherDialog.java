@@ -2,6 +2,7 @@ package com.zhk.main.teacher;
 
 import com.zhk.login.LoginBean;
 import com.zhk.panel.teacher.check.CheckSubjectPanel;
+import com.zhk.panel.teacher.info.student.OperateStudentPanel;
 import com.zhk.panel.teacher.subject.EditSubjectPanel;
 
 import javax.swing.*;
@@ -36,8 +37,11 @@ public class TeacherDialog extends JFrame {
     private void initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu selectMenu = new JMenu("信息查询");
-        JMenuItem showInfoMenuItem = new JMenuItem("基本信息查询");
+        JMenuItem showInfoMenuItem = new JMenuItem("教师基本信息查询");
+        JMenuItem showStudentInfoMenuItem = new JMenuItem("学生基本信息查询");
+        showStudentInfoMenuItem.addActionListener(event -> showStudentInfo());
         selectMenu.add(showInfoMenuItem);
+        selectMenu.add(showStudentInfoMenuItem);
 
         JMenu graduateMenu = new JMenu("毕业设计");
         JMenuItem editSubjectMenuItem = new JMenuItem("编辑课题");
@@ -58,6 +62,13 @@ public class TeacherDialog extends JFrame {
         menuBar.add(graduateMenu);
         menuBar.add(helpMenu);
         setJMenuBar(menuBar);
+    }
+
+    private void showStudentInfo() {
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        mainPanel.add(new OperateStudentPanel(), BorderLayout.CENTER);
+        mainPanel.revalidate();
     }
 
     private void showEditSubject() {

@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  * @author 赵洪苛
- * @date 2019/11/26
+ * @date 2019/11/26 19:24
  * @description jtable的按钮editor
  */
 public class CheckSubjectEditor extends AbstractCellEditor implements TableCellEditor {
@@ -22,6 +22,7 @@ public class CheckSubjectEditor extends AbstractCellEditor implements TableCellE
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "是否" + title + "该学生的课题？", "确认", JOptionPane.YES_NO_OPTION)) {
                 isConfirmed = true;
             }
+            fireEditingStopped();
         });
     }
 

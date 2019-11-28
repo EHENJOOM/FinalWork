@@ -1,11 +1,11 @@
-package com.zhk.mail;
+package com.zhk.email;
 
 import java.util.Date;
 
 /**
  * @author 赵洪苛
- * @date 2019/11/26
- * @description email的相关内容
+ * @date 2019/11/26 18:37
+ * @description email邮件内容实体
  */
 public class EmailBean {
 
@@ -13,6 +13,11 @@ public class EmailBean {
      * 收件人邮箱账号，不含后缀域名
      */
     private String receiveAccount;
+
+    /**
+     * 收件人邮箱后缀
+     */
+    private String suffix;
 
     /**
      * 邮件主题
@@ -31,8 +36,9 @@ public class EmailBean {
 
     public EmailBean() {}
 
-    public EmailBean(String receiveAccount, String subject, String content, Date date) {
+    public EmailBean(String receiveAccount,String suffix, String subject, String content, Date date) {
         this.receiveAccount = receiveAccount;
+        this.subject = suffix;
         this.subject = subject;
         this.content = content;
         this.date = date;
@@ -68,5 +74,13 @@ public class EmailBean {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
     }
 }

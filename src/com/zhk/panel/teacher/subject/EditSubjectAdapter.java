@@ -88,11 +88,7 @@ public class EditSubjectAdapter extends AbstractTableModel {
             case 1:
             case 2:
             case 3:
-                if (subjectBeans.get(rowIndex).getState() == Config.CHANGING_INFO) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return subjectBeans.get(rowIndex).getState() == Config.CHANGING_INFO;
             case 6:
                 return true;
             default:

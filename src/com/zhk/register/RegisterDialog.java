@@ -7,7 +7,7 @@ import javax.swing.*;
 
 /**
  * @author 赵洪苛
- * @date 2019/11/26
+ * @date 2019/11/26 20:18
  * @description 注册或忘记密码窗口
  */
 public class RegisterDialog extends JFrame implements RegisterView {
@@ -28,6 +28,7 @@ public class RegisterDialog extends JFrame implements RegisterView {
     public RegisterDialog(int type) {
         setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setSize(400, 300);
         initView(type);
         presenter.attachView(this);

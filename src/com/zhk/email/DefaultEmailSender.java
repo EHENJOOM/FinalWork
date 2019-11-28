@@ -1,4 +1,4 @@
-package com.zhk.mail;
+package com.zhk.email;
 
 import com.zhk.constant.Config;
 
@@ -9,10 +9,10 @@ import java.util.Properties;
 
 /**
  * @author 赵洪苛
- * @date 2019/11/26
+ * @date 2019/11/26 18:58
  * @description email发送器
  */
-public class EmailSender implements BaseEmailSender {
+public class DefaultEmailSender implements EmailSender {
 
     private Message message;
 
@@ -51,7 +51,7 @@ public class EmailSender implements BaseEmailSender {
         synchronized (lock) {
             message = new MimeMessage(session);
             message.setFrom(new InternetAddress(Config.SEND_EMAIL_ACCOUNT));
-            message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(emailBean.getReceiveAccount() + Config.MAIL_ACCOUNT_SUFFIX));
+            message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(emailBean.getReceiveAccount() + emailBean.getSuffix()));
             message.setSubject(emailBean.getSubject());
             message.setText(emailBean.getContent());
             message.setSentDate(emailBean.getDate());

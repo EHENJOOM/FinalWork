@@ -14,7 +14,7 @@ public interface BaseView {
      * @param msg 错误信息
      */
     default void showError(String msg) {
-        JOptionPane.showMessageDialog(null, msg, "警告", JOptionPane.ERROR_MESSAGE);
+        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null, msg, "警告", JOptionPane.ERROR_MESSAGE));
     }
 
 }

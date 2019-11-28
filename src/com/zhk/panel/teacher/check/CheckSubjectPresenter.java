@@ -34,4 +34,23 @@ public class CheckSubjectPresenter extends BasePresenter<CheckSubjectView> {
         });
     }
 
+    public void check(String topic, MatchBean matchBean) {
+        model.check(topic, matchBean, new BaseCallBack<MatchBean>() {
+            @Override
+            public void onSucceed(MatchBean data) {
+                if (isViewAttached()) {
+                    getView().showMessage("操作成功！", data);
+                }
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                if (isViewAttached()) {
+                    getView().showError(msg);
+                    getView().resetState(matchBean);
+                }
+            }
+        });
+    }
+
 }

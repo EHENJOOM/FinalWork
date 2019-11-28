@@ -88,17 +88,20 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         List<SubjectBean> list = subjectBeans;
         if (of != null && !of.isEmpty()) {
             list = subjectBeans.parallelStream()
-                    .filter(subjectBean -> subjectBean.getOfAcademy().equals(of))
+                    .filter(subjectBean -> subjectBean.getOfAcademy().contains(of)
+                            || subjectBean.getOfAcademy().equals(of))
                     .collect(Collectors.toList());
         }
         if (!subject.isEmpty()) {
             list = list.parallelStream()
-                    .filter(subjectBean -> subjectBean.getName().equals(subject))
+                    .filter(subjectBean -> subjectBean.getName().contains(subject)
+                            || subjectBean.getName().equals(subject))
                     .collect(Collectors.toList());
         }
         if (!teacher.isEmpty()) {
             list = list.parallelStream()
-                    .filter(subjectBean -> subjectBean.getTeacherBean().getName().equals(teacher))
+                    .filter(subjectBean -> subjectBean.getTeacherBean().getName().contains(teacher)
+                            || subjectBean.getTeacherBean().getName().equals(teacher))
                     .collect(Collectors.toList());
         }
 
@@ -124,7 +127,7 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         SwingUtilities.invokeLater(() -> {
             JOptionPane.showMessageDialog(null, msg, "提示", JOptionPane.INFORMATION_MESSAGE);
             subjectBeans.forEach(subjectBean -> {
-                if (data.getSubjectBean().getCode().equals(subjectBean.getCode())) {
+                if (data.getSubjectBean().getId() == subjectBean.getId()) {
                     subjectBean.setState(data.getState());
                 }
             });

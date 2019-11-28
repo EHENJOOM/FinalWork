@@ -9,7 +9,7 @@ import javax.swing.*;
 
 /**
  * @author 赵洪苛
- * @date 2019/11/26
+ * @date 2019/11/26 20:18
  * @description 注册或忘记密码逻辑处理器
  */
 public class RegisterPresenter extends BasePresenter<RegisterView> {

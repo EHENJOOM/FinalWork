@@ -120,4 +120,38 @@ public class EditSubjectModel {
         });
     }
 
+    /**
+     * 加入一条数据
+     * @param subjectBean 要加入的数据
+     * @param baseCallBack 加入回调
+     */
+    public void insert(SubjectBean subjectBean, BaseCallBack<String> baseCallBack) {
+        ThreadPoolEnum.getInstance().execute(() -> {
+            Connection connection = ConnectionPoolEnum.getInstance().getConnection();
+            String sql = "insert into subject(code, name, academy, teacher, total, accepted, confirming) values(?, ?, ?, ?, ?, ?, ?)";
+
+            try {
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, subjectBean.getCode());
+                statement.setString(2, subjectBean.getName());
+                statement.setString(3, subjectBean.getOfAcademy());
+                statement.setString(4, subjectBean.getTeacherBean().getNumber());
+                statement.setInt(5, subjectBean.getTotalNum());
+                statement.setInt(6, subjectBean.getAcceptedNum());
+                statement.setInt(7, subjectBean.getConfirmingNum());
+
+                if (statement.executeUpdate() == 1) {
+                    baseCallBack.onSucceed("操作成功！");
+                } else {
+                    baseCallBack.onFailed("操作失败！");
+                }
+                statement.close();
+            } catch (SQLException e) {
+                baseCallBack.onFailed("数据库连接失败！");
+            } finally {
+                ConnectionPoolEnum.getInstance().putBack(connection);
+            }
+        });
+    }
+
 }

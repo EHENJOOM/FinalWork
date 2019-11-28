@@ -16,6 +16,23 @@ public class Events {
      */
     public static final String CANCEL_MATCH = "cancel_match";
 
+    /**
+     * 修改课题信息
+     */
     public static final String CHANGE_SUBJECT = "change_subject";
 
+    /**
+     * 修改学生信息
+     */
+    public static final String CHANGE_STUDENT = "change_student";
+
+    /**
+     * 接收该学生的课题请求
+     */
+    public static final String ACCEPT_STUDENT = "accept_student";
+
+    /**
+     * 拒绝该学生的课题请求
+     */
+    public static final String REFUSE_STUDENT = "refuse_student";
 }

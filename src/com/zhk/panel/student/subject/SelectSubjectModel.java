@@ -1,5 +1,6 @@
 package com.zhk.panel.student.subject;
 
+import com.zhk.constant.Config;
 import com.zhk.db.ConnectionPoolEnum;
 import com.zhk.login.LoginBean;
 import com.zhk.main.teacher.TeacherBean;
@@ -43,6 +44,7 @@ public class SelectSubjectModel {
                     subjectBean.setTotalNum(resultSet.getInt("total"));
                     subjectBean.setAcceptedNum(resultSet.getInt("accepted"));
                     subjectBean.setConfirmingNum(resultSet.getInt("confirming"));
+                    subjectBean.setState(Config.UNSELECTED_SUBJECT);
                     TeacherBean teacherBean = new TeacherBean();
                     teacherBean.setNumber(resultSet.getString("teacher"));
                     subjectBean.setTeacherBean(teacherBean);
