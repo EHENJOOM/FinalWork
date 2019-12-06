@@ -1,7 +1,7 @@
 package com.zhk.panel.student.info;
 
 import com.zhk.login.LoginBean;
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 import com.zhk.mvp.BaseCallBack;
 import com.zhk.mvp.BasePresenter;
 
@@ -19,7 +19,7 @@ public class SelectInfoPresenter extends BasePresenter<SelectInfoView> {
             @Override
             public void onSucceed(StudentBean data) {
                 if (isViewAttached()) {
-                    getView().showInfo(data);
+                    getView().show(data);
                 }
             }
 

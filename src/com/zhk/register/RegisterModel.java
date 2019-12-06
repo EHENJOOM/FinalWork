@@ -67,6 +67,7 @@ public class RegisterModel {
 
     /**
      * 验证验证码是否合法
+     * @param account 账号
      * @param verifyCode 验证码
      * @param baseCallBack 验证回调
      */

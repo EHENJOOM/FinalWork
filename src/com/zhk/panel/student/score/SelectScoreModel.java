@@ -2,8 +2,8 @@ package com.zhk.panel.student.score;
 
 import com.zhk.db.ConnectionPoolEnum;
 import com.zhk.login.LoginBean;
-import com.zhk.main.student.StudentBean;
-import com.zhk.main.teacher.TeacherBean;
+import com.zhk.main.StudentBean;
+import com.zhk.main.TeacherBean;
 import com.zhk.mvp.BaseCallBack;
 import com.zhk.thread.ThreadPoolEnum;
 
@@ -134,12 +134,13 @@ public class SelectScoreModel {
                 });
             }
 
-            ConnectionPoolEnum.getInstance().putBack(connection);
             statement.close();
             resultSet.close();
             baseCallBack.onSucceed(list);
         } catch (SQLException e) {
             baseCallBack.onFailed("数据读取失败！");
+        } finally {
+            ConnectionPoolEnum.getInstance().putBack(connection);
         }
     }
 

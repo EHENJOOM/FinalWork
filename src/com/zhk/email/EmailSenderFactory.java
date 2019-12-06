@@ -3,7 +3,7 @@ package com.zhk.email;
 /**
  * @author 赵洪苛
  * @date 2019/11/28 17:27
- * @description 工厂模式，eamil发送器工厂。可根据自己情况，实现{@link EmailSender}接口，完成一个邮件发送器对象，然后创建静态工厂方法获取对象。
+ * @description 工厂模式，email发送器工厂。可根据自己情况，实现{@link EmailSender}接口，完成一个邮件发送器对象，然后创建静态工厂方法获取对象。
  */
 public class EmailSenderFactory {
 

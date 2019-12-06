@@ -1,6 +1,6 @@
 package com.zhk.panel.teacher.info.student;
 
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 import com.zhk.mvp.BaseCallBack;
 import com.zhk.mvp.BasePresenter;
 
@@ -45,7 +45,7 @@ public class OperateStudentPresenter extends BasePresenter<OperateStudentView> {
             @Override
             public void onSucceed(StudentBean data) {
                 if (isViewAttached()) {
-
+                    getView().showMessage("更新成功！");
                 }
             }
 
@@ -67,7 +67,7 @@ public class OperateStudentPresenter extends BasePresenter<OperateStudentView> {
             @Override
             public void onSucceed(StudentBean data) {
                 if (isViewAttached()) {
-
+                    getView().showMessage("操作成功！");
                 }
             }
 
@@ -89,7 +89,8 @@ public class OperateStudentPresenter extends BasePresenter<OperateStudentView> {
             @Override
             public void onSucceed(StudentBean data) {
                 if (isViewAttached()) {
-
+                    getView().showMessage("删除成功！");
+                    getView().deleteApply(data);
                 }
             }
 

@@ -1,38 +1,59 @@
 package com.zhk.panel.student.subject;
 
-import com.zhk.main.teacher.TeacherBean;
+import com.zhk.main.TeacherBean;
+
+import java.io.Serializable;
 
 /**
  * @author 赵洪苛
  * @date 2019/11/23 18:00
  * @description 课题数据实例类
  */
-public class SubjectBean {
+public class SubjectBean implements Serializable {
 
-    // 课题主管学院
+    /**
+     * 课题主管学院
+     */
     private String ofAcademy;
 
-    // 题目名称
+    /**
+     * 题目名称
+     */
     private String name;
 
-    // 课题代码
+    /**
+     * 课题代码
+     */
     private String code;
 
+    /**
+     * 课题唯一标识，恒大于0，自动增长
+     */
     private int id;
 
-    // 当前学生对该课题的状态
+    /**
+     * 当前学生对该课题的状态
+     */
     private int state;
 
-    // 课题可接受总人数
+    /**
+     * 课题可接受总人数
+     */
     private int totalNum;
 
-    // 课题已接收人数
+    /**
+     * 课题已接收人数
+     */
     private int acceptedNum;
 
-    // 课题待确认人数
+    /**
+     * 课题待确认人数
+     */
     private int confirmingNum;
 
-    // 指导教师信息
+    /**
+     * 指导教师信息
+     */
     private TeacherBean teacherBean;
 
     public void setId(int id) {

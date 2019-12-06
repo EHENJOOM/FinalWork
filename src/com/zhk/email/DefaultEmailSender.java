@@ -18,15 +18,6 @@ public class DefaultEmailSender implements EmailSender {
 
     private Session session;
 
-    private boolean initial = false;
-
-    private final Object lock = new Object();
-
-    @Override
-    public boolean isInitial() {
-        return this.initial;
-    }
-
     @Override
     public void init() {
         Properties props = new Properties();
@@ -42,38 +33,29 @@ public class DefaultEmailSender implements EmailSender {
 
         // 设置为debug模式, 可以查看详细的发送 log
         session.setDebug(true);
-
-        initial = true;
     }
 
     @Override
-    public void setEmailContent(EmailBean emailBean) throws MessagingException {
-        synchronized (lock) {
-            message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(Config.SEND_EMAIL_ACCOUNT));
-            message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(emailBean.getReceiveAccount() + emailBean.getSuffix()));
-            message.setSubject(emailBean.getSubject());
-            message.setText(emailBean.getContent());
-            message.setSentDate(emailBean.getDate());
-            message.saveChanges();
-        }
+    public <T> void setEmailContent(T emailBean) throws MessagingException {
+        message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(Config.SEND_EMAIL_ACCOUNT));
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(((EmailBean)emailBean).getReceiveAccount() + ((EmailBean)emailBean).getSuffix()));
+        message.setSubject(((EmailBean)emailBean).getSubject());
+        message.setText(((EmailBean)emailBean).getContent());
+        message.setSentDate(((EmailBean)emailBean).getDate());
+        message.saveChanges();
     }
 
     @Override
     public void sendMessage() throws MessagingException {
         // 根据 Session 获取邮件传输对象
         Transport transport = session.getTransport();
-
         // 使用 邮箱账号 和 密码 连接邮件服务器, 这里认证的邮箱必须与 message 中的发件人邮箱一致, 否则会报错
         transport.connect(Config.SEND_EMAIL_ACCOUNT, Config.SEND_EMAIL_PASSWORD);
+        // 发送邮件
+        transport.sendMessage(message, message.getAllRecipients());
 
-        synchronized (lock) {
-            // 发送邮件
-            transport.sendMessage(message, message.getAllRecipients());
-
-            // 关闭连接
-            transport.close();
-            message = null;
-        }
+        transport.close();
+        message = null;
     }
 }

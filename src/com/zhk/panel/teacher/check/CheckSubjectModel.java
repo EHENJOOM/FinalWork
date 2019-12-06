@@ -4,10 +4,9 @@ import com.zhk.constant.Config;
 import com.zhk.db.ConnectionPoolEnum;
 import com.zhk.event.Events;
 import com.zhk.login.LoginBean;
-import com.zhk.main.student.StudentBean;
-import com.zhk.main.teacher.TeacherBean;
+import com.zhk.main.StudentBean;
+import com.zhk.main.TeacherBean;
 import com.zhk.mvp.BaseCallBack;
-import com.zhk.mvp.BaseModel;
 import com.zhk.panel.student.subject.MatchBean;
 import com.zhk.panel.student.subject.SubjectBean;
 import com.zhk.thread.ThreadPoolEnum;
@@ -142,9 +141,10 @@ public class CheckSubjectModel {
             baseCallBack.onSucceed(matchBeans);
             statement.close();
             resultSet.close();
-            ConnectionPoolEnum.getInstance().putBack(connection);
         } catch (SQLException e) {
             baseCallBack.onFailed("数据库连接失败！");
+        } finally {
+            ConnectionPoolEnum.getInstance().putBack(connection);
         }
     }
 

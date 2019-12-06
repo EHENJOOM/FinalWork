@@ -2,6 +2,7 @@ package com.zhk.register;
 
 import com.zhk.constant.Config;
 import com.zhk.login.LoginBean;
+import com.zhk.login.LoginDialog;
 
 import javax.swing.*;
 
@@ -102,7 +103,11 @@ public class RegisterDialog extends JFrame implements RegisterView {
 
     @Override
     public void toLogin(LoginBean loginBean) {
-
+        SwingUtilities.invokeLater(() -> {
+            this.dispose();
+            LoginDialog loginDialog = new LoginDialog();
+            loginDialog.setVisible(true);
+        });
     }
 
 }

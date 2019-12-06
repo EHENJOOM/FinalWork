@@ -1,6 +1,6 @@
 package com.zhk.panel.student.exam;
 
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 
 /**
  * @author 赵洪苛
@@ -9,19 +9,26 @@ import com.zhk.main.student.StudentBean;
  */
 public class ExamBean {
 
-    // 考试信息唯一标识
+    /**
+     * 考试信息唯一标识
+     */
     private int id;
 
-    // 学生信息
     private StudentBean studentBean;
 
-    // 课程代码
+    /**
+     * 课程代码
+     */
     private String code;
 
-    // 课程名称
+    /**
+     * 课程名称
+     */
     private String name;
 
-    // 考试时间
+    /**
+     * 考试时间
+     */
     private String time;
 
     public void setName(String name) {

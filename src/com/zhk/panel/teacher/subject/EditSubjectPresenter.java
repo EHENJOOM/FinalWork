@@ -5,6 +5,7 @@ import com.zhk.mvp.BaseCallBack;
 import com.zhk.mvp.BasePresenter;
 import com.zhk.panel.student.subject.SubjectBean;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -62,6 +63,7 @@ public class EditSubjectPresenter extends BasePresenter<EditSubjectView> {
 
     /**
      * @see EditSubjectModel#delete(SubjectBean, BaseCallBack)
+     * @param row 删除的行
      * @param subjectBean 需要删除的数据
      */
     public void delete(int row, SubjectBean subjectBean) {
@@ -105,4 +107,40 @@ public class EditSubjectPresenter extends BasePresenter<EditSubjectView> {
         });
     }
 
+    public void exportSubject(List<SubjectBean> subjectBeans, File file) {
+        model.exportSubject(subjectBeans, file, new BaseCallBack<String>() {
+            @Override
+            public void onSucceed(String data) {
+                if (isViewAttached()) {
+                    getView().showMessage(data);
+                }
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                if (isViewAttached()) {
+                    getView().showError(msg);
+                }
+            }
+        });
+    }
+
+    public void importSubject(File file) {
+        model.importSubject(file, new BaseCallBack<List<SubjectBean>>() {
+            @Override
+            public void onSucceed(List<SubjectBean> data) {
+                if (isViewAttached()) {
+                    getView().update(data);
+                    getView().showMessage("导入成功！");
+                }
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                if (isViewAttached()) {
+                    getView().showError(msg);
+                }
+            }
+        });
+    }
 }

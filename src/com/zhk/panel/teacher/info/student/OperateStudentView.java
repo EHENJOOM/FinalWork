@@ -1,6 +1,6 @@
 package com.zhk.panel.teacher.info.student;
 
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 import com.zhk.mvp.BaseView;
 
 import java.util.List;
@@ -24,6 +24,10 @@ public interface OperateStudentView extends BaseView {
      */
     void showMessage(String msg);
 
-    void deleteApply(int row);
+    /**
+     * 删除临时数据，确保数据库中数据与临时数据一致
+     * @param data 数据
+     */
+    void deleteApply(StudentBean data);
 
 }

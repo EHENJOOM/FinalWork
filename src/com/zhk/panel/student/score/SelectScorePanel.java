@@ -58,6 +58,9 @@ public class SelectScorePanel extends JPanel implements SelectScoreView {
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+     * 使用list的流操作筛选符合条件的信息
+     */
     private void filter() {
         String teacher = teacherText.getText();
         String course = courseText.getText();
@@ -76,7 +79,7 @@ public class SelectScorePanel extends JPanel implements SelectScoreView {
         }
 
         if (list.size() == 0) {
-            JOptionPane.showMessageDialog(this, "没有找到符合条件的成绩", "提示", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "没有找到符合条件的记录", "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
             adapter.setScoreBeans(list);
             table.updateUI();

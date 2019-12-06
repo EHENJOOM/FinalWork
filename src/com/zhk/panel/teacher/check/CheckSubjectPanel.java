@@ -55,8 +55,7 @@ public class CheckSubjectPanel extends JPanel implements CheckSubjectView, Event
         studentAcademyCombo = new JComboBox<>();
         JButton filterButton = new JButton("查找");
 
-        String[] items = new String[]{null, "经济管理学院", "信息科技与技术学院", "马克思主义学院", "文法学院"};
-        for (String item : items) {
+        for (String item : Config.ACADEMY) {
             ofAcademyCombo.addItem(item);
             studentAcademyCombo.addItem(item);
         }
@@ -132,6 +131,12 @@ public class CheckSubjectPanel extends JPanel implements CheckSubjectView, Event
 
     @Override
     public void onEvent(String topic, int msgCode, int resultCode, Object object) {
-        presenter.check(topic, (MatchBean)object);
+        switch (topic) {
+            case Events.ACCEPT_STUDENT:
+            case Events.REFUSE_STUDENT:
+                presenter.check(topic, (MatchBean)object);
+                break;
+            default:
+        }
     }
 }

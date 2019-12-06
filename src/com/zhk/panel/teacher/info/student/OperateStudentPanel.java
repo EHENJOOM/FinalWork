@@ -4,7 +4,7 @@ import com.zhk.constant.Config;
 import com.zhk.event.EventCenter;
 import com.zhk.event.EventListener;
 import com.zhk.event.Events;
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 import com.zhk.panel.teacher.subject.EditButtonEditor;
 import com.zhk.panel.teacher.subject.EditButtonRender;
 
@@ -49,12 +49,10 @@ public class OperateStudentPanel extends JPanel implements OperateStudentView, E
         table = new JTable(adapter);
         scrollPane.setViewportView(table);
 
-        // TODO 学院，专业信息
-        String[] major = new String[]{""};
-        String[] academy = new String[]{""};
+        String[] major = new String[]{"信息管理与信息系统", "会计", "物流", "财务管理", "国际贸易"};
         table.getColumnModel().getColumn(2).setCellEditor(new ComboBoxEditor(new String[]{"男", "女"}));
         table.getColumnModel().getColumn(3).setCellEditor(new ComboBoxEditor(major));
-        table.getColumnModel().getColumn(4).setCellEditor(new ComboBoxEditor(academy));
+        table.getColumnModel().getColumn(4).setCellEditor(new ComboBoxEditor(Config.ACADEMY));
         table.getColumnModel().getColumn(6).setCellEditor(new EditButtonEditor());
         table.getColumnModel().getColumn(6).setCellRenderer(new EditButtonRender());
 
@@ -72,8 +70,7 @@ public class OperateStudentPanel extends JPanel implements OperateStudentView, E
         nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         numberLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        String[] items = new String[]{null, "经济管理学院", "信息科技与技术学院", "马克思主义学院", "文法学院"};
-        for (String item : items) {
+        for (String item : Config.ACADEMY) {
             academyCombo.addItem(item);
         }
 
@@ -89,6 +86,9 @@ public class OperateStudentPanel extends JPanel implements OperateStudentView, E
         add(headPanel, BorderLayout.NORTH);
     }
 
+    /**
+     * 初始化右键菜单
+     */
     private void initPopupMenu() {
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem deleteMenuItem = new JMenuItem("删除");
@@ -162,9 +162,9 @@ public class OperateStudentPanel extends JPanel implements OperateStudentView, E
     }
 
     @Override
-    public void deleteApply(int row) {
+    public void deleteApply(StudentBean data) {
         SwingUtilities.invokeLater(() -> {
-            studentBeans.remove(row);
+            studentBeans.remove(data);
             table.updateUI();
         });
     }

@@ -51,4 +51,12 @@ public enum ThreadPoolEnum {
     public void removeThread(int num) {
         pool.removeThread(num);
     }
+
+    /**
+     * @see ThreadPool#getWaitSize()
+     * @return 当前正坐在等待执行的任务数量
+     */
+    public int getWaitSize() {
+        return pool.getWaitSize();
+    }
 }

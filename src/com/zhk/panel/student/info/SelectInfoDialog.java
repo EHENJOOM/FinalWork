@@ -1,7 +1,7 @@
 package com.zhk.panel.student.info;
 
 import com.zhk.login.LoginBean;
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 
 import javax.swing.*;
 
@@ -30,7 +30,7 @@ public class SelectInfoDialog extends JFrame implements SelectInfoView {
     }
 
     @Override
-    public void showInfo(StudentBean studentBean) {
+    public void show(StudentBean studentBean) {
         SwingUtilities.invokeLater(() -> {
             nameText.setText(studentBean.getName());
             numberText.setText(studentBean.getNumber());

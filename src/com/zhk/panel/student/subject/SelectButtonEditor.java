@@ -14,7 +14,10 @@ import java.awt.*;
 public class SelectButtonEditor extends AbstractCellEditor implements TableCellEditor {
 
     private JButton selectButton;
-    // 0代表还未选课题
+
+    /**
+     * 存储当前的状态
+     */
     private int state = Config.UNSELECTED_SUBJECT;
 
     public SelectButtonEditor() {

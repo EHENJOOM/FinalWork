@@ -11,22 +11,17 @@ import javax.mail.MessagingException;
 public interface EmailSender {
 
     /**
-     * 判断当前配置是否初始化
-     * @return {@code true}代表已初始化，{@code false}代表还未初始化
-     */
-    boolean isInitial();
-
-    /**
      * 初始化配置信息，只需要初始化一次即可
      */
     void init();
 
     /**
      * 设置email邮件的内容信息
-     * @param emailBean 邮件数据实体
+     * @param content 邮件数据实体
+     * @param <T> 邮件数据实体类型。可根据需要自由定制
      * @throws MessagingException 邮件发送失败的异常
      */
-    void setEmailContent(EmailBean emailBean) throws MessagingException;
+    <T> void setEmailContent(T content) throws MessagingException;
 
     /**
      * 邮件配置完之后，发送邮件

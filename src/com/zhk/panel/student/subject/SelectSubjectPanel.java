@@ -1,5 +1,6 @@
 package com.zhk.panel.student.subject;
 
+import com.zhk.constant.Config;
 import com.zhk.event.EventCenter;
 import com.zhk.event.EventListener;
 import com.zhk.event.Events;
@@ -32,6 +33,7 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         initView();
         presenter.attachView(this);
         presenter.select(loginBean);
+        // 注册对INSERT_MATCH，CANCEL_MATCH事件的监听器
         EventCenter.registerEventListener(this, new String[]{Events.INSERT_MATCH, Events.CANCEL_MATCH});
     }
 
@@ -61,8 +63,7 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         selectButton.setHorizontalAlignment(SwingConstants.CENTER);
 
         selectButton.addActionListener(event -> filter());
-        String[] items = new String[]{null, "经济管理学院", "信息科技与技术学院", "马克思主义学院", "文法学院"};
-        for (String item : items) {
+        for (String item : Config.ACADEMY) {
             ofAcademyCombo.addItem(item);
         }
 
@@ -80,6 +81,9 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+     * 过滤符合条件的记录
+     */
     private void filter() {
         String of = (String) ofAcademyCombo.getSelectedItem();
         String subject = subjectTextField.getText();

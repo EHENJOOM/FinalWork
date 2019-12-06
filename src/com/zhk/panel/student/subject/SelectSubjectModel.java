@@ -3,7 +3,7 @@ package com.zhk.panel.student.subject;
 import com.zhk.constant.Config;
 import com.zhk.db.ConnectionPoolEnum;
 import com.zhk.login.LoginBean;
-import com.zhk.main.teacher.TeacherBean;
+import com.zhk.main.TeacherBean;
 import com.zhk.mvp.BaseCallBack;
 import com.zhk.thread.ThreadPoolEnum;
 
@@ -127,12 +127,13 @@ public class SelectSubjectModel {
                 }
             }
 
-            ConnectionPoolEnum.getInstance().putBack(connection);
             statement.close();
             resultSet.close();
             baseCallBack.onSucceed(subjectBeans);
         } catch (SQLException e) {
             baseCallBack.onFailed("数据库连接失败！");
+        } finally {
+            ConnectionPoolEnum.getInstance().putBack(connection);
         }
     }
 
@@ -144,18 +145,22 @@ public class SelectSubjectModel {
     public void insertSelectedSubject(MatchBean matchBean, BaseCallBack<MatchBean> baseCallBack) {
         ThreadPoolEnum.getInstance().execute(() -> {
             Connection connection = ConnectionPoolEnum.getInstance().getConnection();
-            String sql = "insert into stu_sub(number, code, state) values(?,?,?)";
+            String sql = "insert into stu_sub(number, teacher, code, state, subject) values(?,?,?,?,?)";
 
             try {
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, matchBean.getStudentBean().getNumber());
-                statement.setString(2, matchBean.getSubjectBean().getCode());
-                statement.setInt(3, matchBean.getState());
+                statement.setString(2, matchBean.getTeacherBean().getNumber());
+                statement.setString(3, matchBean.getSubjectBean().getCode());
+                statement.setInt(4, matchBean.getState());
+                statement.setInt(5, matchBean.getSubjectBean().getId());
                 statement.executeUpdate();
 
                 statement.close();
-                baseCallBack.onSucceed(matchBean);
+                matchBean.getSubjectBean().setConfirmingNum(matchBean.getSubjectBean().getConfirmingNum() + 1);
+                updateNumber(matchBean, connection, baseCallBack);
             } catch (SQLException e) {
+                e.printStackTrace();
                 baseCallBack.onFailed("选择课题失败！");
             }
         });
@@ -178,12 +183,40 @@ public class SelectSubjectModel {
                 statement.executeUpdate();
 
                 statement.close();
-                baseCallBack.onSucceed(matchBean);
+                matchBean.getSubjectBean().setConfirmingNum(matchBean.getSubjectBean().getConfirmingNum() - 1);
+                updateNumber(matchBean, connection, baseCallBack);
             } catch (SQLException e) {
-                e.printStackTrace();
                 baseCallBack.onFailed("退选课题失败！");
             }
         });
+    }
+
+    /**
+     * 更新数据库中课题待确认人数
+     * @param matchBean 匹配数据表
+     * @param connection 数据库连接
+     * @param baseCallBack 回调
+     */
+    private void updateNumber(MatchBean matchBean, Connection connection, BaseCallBack<MatchBean> baseCallBack) {
+        String sql = "update subject set confirming = ? where id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, matchBean.getSubjectBean().getConfirmingNum());
+            statement.setInt(2, matchBean.getSubjectBean().getId());
+
+            if (statement.executeUpdate() == 1) {
+                baseCallBack.onSucceed(matchBean);
+            } else {
+                baseCallBack.onFailed("选择课题失败！");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            baseCallBack.onFailed("数据库连接失败！");
+        } finally {
+            ConnectionPoolEnum.getInstance().putBack(connection);
+        }
     }
 
 }

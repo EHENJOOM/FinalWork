@@ -1,7 +1,7 @@
 package com.zhk.panel.student.score;
 
-import com.zhk.main.student.StudentBean;
-import com.zhk.main.teacher.TeacherBean;
+import com.zhk.main.StudentBean;
+import com.zhk.main.TeacherBean;
 
 /**
  * @author 赵洪苛
@@ -10,28 +10,41 @@ import com.zhk.main.teacher.TeacherBean;
  */
 public class ScoreBean {
 
-    // 唯一标识
+    /**
+     * 唯一标识
+     */
     private int id;
 
-    // 学生信息
+    /**
+     * 学生信息
+     */
     private StudentBean studentBean;
 
-    // 课程代码
+    /**
+     * 课程代码
+     */
     private String code;
 
-    // 课程名
+    /**
+     * 课程名
+     */
     private String name;
 
-    // 课程性质
+    /**
+     * 课程性质
+     */
     private String property;
 
-    // 该课程分数
+    /**
+     * 该课程分数
+     */
     private int score;
 
-    // 该课程绩点
+    /**
+     * 该课程绩点
+     */
     private float point;
 
-    // 教师信息
     private TeacherBean teacherBean;
 
     public void setStudentBean(StudentBean studentBean) {

@@ -1,6 +1,6 @@
 package com.zhk.panel.student.info;
 
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 import com.zhk.mvp.BaseView;
 
 /**
@@ -14,6 +14,6 @@ public interface SelectInfoView extends BaseView {
      * 显示学生信息
      * @param studentBean 学生数据实体
      */
-    void showInfo(StudentBean studentBean);
+    void show(StudentBean studentBean);
 
 }

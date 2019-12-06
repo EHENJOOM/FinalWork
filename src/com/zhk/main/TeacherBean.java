@@ -1,4 +1,4 @@
-package com.zhk.main.teacher;
+package com.zhk.main;
 
 /**
  * @author 赵洪苛
@@ -9,12 +9,16 @@ public class TeacherBean {
 
     // 教师姓名
     private String name;
+
     // 教师工号
     private String number;
+
     // 教师性别
     private String sex;
+
     // 教师职称
     private String jobTitle;
+
     // 教师所属学院
     private String ofAcademy;
 

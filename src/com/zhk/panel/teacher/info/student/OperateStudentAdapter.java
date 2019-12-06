@@ -3,7 +3,7 @@ package com.zhk.panel.teacher.info.student;
 import com.zhk.constant.Config;
 import com.zhk.event.EventCenter;
 import com.zhk.event.Events;
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;

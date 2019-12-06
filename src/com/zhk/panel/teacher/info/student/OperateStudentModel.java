@@ -2,7 +2,7 @@ package com.zhk.panel.teacher.info.student;
 
 import com.zhk.constant.Config;
 import com.zhk.db.ConnectionPoolEnum;
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 import com.zhk.mvp.BaseCallBack;
 import com.zhk.thread.ThreadPoolEnum;
 

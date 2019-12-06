@@ -1,12 +1,12 @@
 package com.zhk.panel.student.subject;
 
-import com.zhk.main.student.StudentBean;
-import com.zhk.main.teacher.TeacherBean;
+import com.zhk.main.StudentBean;
+import com.zhk.main.TeacherBean;
 
 /**
  * @author 赵洪苛
  * @date 2019/11/24 13:45
- * @description 学生选择课题的匹配实例
+ * @description 学生与课题的匹配实例
  */
 public class MatchBean {
 

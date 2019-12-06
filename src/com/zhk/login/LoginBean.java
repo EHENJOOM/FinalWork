@@ -16,10 +16,6 @@ public class LoginBean {
     // 用户类型
     private int type;
 
-    public static final int STUDENT = 0;
-
-    public static final int TEACHER = 1;
-
     public LoginBean() {}
 
     public LoginBean(String account, String password) {

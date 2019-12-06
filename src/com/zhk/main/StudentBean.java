@@ -1,4 +1,4 @@
-package com.zhk.main.student;
+package com.zhk.main;
 
 /**
  * @author 赵洪苛

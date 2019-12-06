@@ -19,15 +19,15 @@ public interface CheckSubjectView extends BaseView {
     void update(List<MatchBean> matchBeans);
 
     /**
-     *
-     * @param msg
-     * @param data
+     * 显示操作之后的提示信息
+     * @param msg 提示信息
+     * @param data 操作后的数据
      */
     void showMessage(String msg, MatchBean data);
 
     /**
-     *
-     * @param matchBean
+     * 重置状态。防止数据库更新失败导致数据库数据和临时数据不一致
+     * @param matchBean 数据
      */
     void resetState(MatchBean matchBean);
 

@@ -16,6 +16,11 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
 
     private RegisterModel model = new RegisterModel();
 
+    /**
+     * @see RegisterModel#sendVerifyCode(int, String, BaseCallBack)
+     * @param type 当前窗口类型
+     * @param account 账号
+     */
     public void sendVerifyCode(int type, String account) {
         model.sendVerifyCode(type, account, new BaseCallBack<String>() {
             @Override
@@ -34,6 +39,12 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
         });
     }
 
+    /**
+     * @see RegisterModel#verify(String, String, BaseCallBack)
+     * @param type 当前窗口leixinh
+     * @param verifyCode 用户输入的验证码
+     * @param loginBean 账户数据
+     */
     public void verify(int type, String verifyCode, LoginBean loginBean) {
         model.verify(loginBean.getAccount(), verifyCode, new BaseCallBack<String>() {
             @Override
@@ -56,6 +67,10 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
         });
     }
 
+    /**
+     * @see RegisterModel#updatePassword(LoginBean, BaseCallBack)
+     * @param loginBean 账户数据
+     */
     public void updatePassword(LoginBean loginBean) {
         model.updatePassword(loginBean, new BaseCallBack<LoginBean>() {
             @Override
@@ -76,6 +91,10 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
         });
     }
 
+    /**
+     * @see RegisterModel#register(LoginBean, BaseCallBack)
+     * @param loginBean 账户数据
+     */
     public void register(LoginBean loginBean) {
         model.register(loginBean, new BaseCallBack<LoginBean>() {
             @Override

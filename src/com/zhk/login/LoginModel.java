@@ -38,12 +38,13 @@ public class LoginModel {
                     bean.setType(resultSet.getInt("type"));
                 }
 
-                ConnectionPoolEnum.getInstance().putBack(connection);
                 statement.close();
                 resultSet.close();
                 baseCallBack.onSucceed(bean);
             } catch (SQLException e) {
                 baseCallBack.onFailed("数据库连接错误！");
+            } finally {
+                ConnectionPoolEnum.getInstance().putBack(connection);
             }
         });
     }

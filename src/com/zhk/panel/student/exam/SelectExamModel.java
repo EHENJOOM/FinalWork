@@ -19,6 +19,11 @@ import java.util.List;
  */
 public class SelectExamModel {
 
+    /**
+     * 查找考试信息
+     * @param loginBean 账号信息
+     * @param baseCallBack 查找回调
+     */
     public void select(LoginBean loginBean, BaseCallBack<List<ExamBean>> baseCallBack) {
         ThreadPoolEnum.getInstance().execute(() -> {
             Connection connection = ConnectionPoolEnum.getInstance().getConnection();
@@ -38,12 +43,13 @@ public class SelectExamModel {
                     examBeans.add(examBean);
                 }
 
-                ConnectionPoolEnum.getInstance().putBack(connection);
                 statement.close();
                 resultSet.close();
                 baseCallBack.onSucceed(examBeans);
             } catch (SQLException e) {
                 baseCallBack.onFailed("数据库连接失败！");
+            } finally {
+                ConnectionPoolEnum.getInstance().putBack(connection);
             }
         });
     }

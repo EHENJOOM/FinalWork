@@ -1,8 +1,7 @@
 package com.zhk.login;
 
 import com.zhk.constant.Config;
-import com.zhk.main.student.StudentDialog;
-import com.zhk.main.teacher.TeacherDialog;
+import com.zhk.main.MainDialog;
 import com.zhk.register.RegisterDialog;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
@@ -18,6 +17,10 @@ import java.awt.event.MouseEvent;
  * @description 登录窗口
  */
 public class LoginDialog extends JFrame implements LoginView {
+
+    /**
+     * 使用了IDEA的创建Dialog的工具，初始化控件的代码自动插入至字节码文件中
+     */
     private JPanel contentPane;
     private JTextField accountTxtField;
     private JTextField passwordTxtField;
@@ -29,9 +32,13 @@ public class LoginDialog extends JFrame implements LoginView {
 
     public LoginDialog() {
         initView();
+        // 逻辑处理器绑定视图
         loginPresenter.attachView(this);
     }
 
+    /**
+     * 初始化视图
+     */
     private void initView() {
         setContentPane(contentPane);
         setSize(350, 280);
@@ -77,24 +84,12 @@ public class LoginDialog extends JFrame implements LoginView {
     }
 
     @Override
-    public void showError(String msg) {
-        SwingUtilities.invokeLater(() -> {
-            JOptionPane.showMessageDialog(this, msg, "警告", JOptionPane.ERROR_MESSAGE);
-        });
-    }
-
-    @Override
     public void login(LoginBean loginBean) {
         // 退出消费者线程，使用事件分发者线程更新UI
         SwingUtilities.invokeLater(() -> {
             this.dispose();
-            if (loginBean.getType() == LoginBean.STUDENT) {
-                StudentDialog studentDialog = new StudentDialog(loginBean);
-                studentDialog.setVisible(true);
-            } else {
-                TeacherDialog teacherDialog = new TeacherDialog(loginBean);
-                teacherDialog.setVisible(true);
-            }
+            MainDialog mainDialog = new MainDialog(loginBean);
+            mainDialog.setVisible(true);
         });
     }
 

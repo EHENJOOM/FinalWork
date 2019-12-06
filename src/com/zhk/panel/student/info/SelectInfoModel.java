@@ -2,7 +2,7 @@ package com.zhk.panel.student.info;
 
 import com.zhk.db.ConnectionPoolEnum;
 import com.zhk.login.LoginBean;
-import com.zhk.main.student.StudentBean;
+import com.zhk.main.StudentBean;
 import com.zhk.mvp.BaseCallBack;
 import com.zhk.thread.ThreadPoolEnum;
 
@@ -15,6 +15,11 @@ import java.sql.*;
  */
 public class SelectInfoModel {
 
+    /**
+     * 查询学生基本信息
+     * @param loginBean 账号数据
+     * @param baseCallBack 查询回调
+     */
     public void select(LoginBean loginBean, BaseCallBack<StudentBean> baseCallBack) {
         ThreadPoolEnum.getInstance().execute(() -> {
             Connection connection = ConnectionPoolEnum.getInstance().getConnection();
@@ -35,12 +40,13 @@ public class SelectInfoModel {
                     studentBean.setId(resultSet.getInt("id"));
                 }
 
-                ConnectionPoolEnum.getInstance().putBack(connection);
                 statement.close();
                 resultSet.close();
                 baseCallBack.onSucceed(studentBean);
             } catch (SQLException e) {
                 baseCallBack.onFailed("数据库连接失败！");
+            } finally {
+                ConnectionPoolEnum.getInstance().putBack(connection);
             }
         });
     }
