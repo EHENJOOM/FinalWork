@@ -5,6 +5,7 @@ import com.zhk.event.EventCenter;
 import com.zhk.event.EventListener;
 import com.zhk.event.Events;
 import com.zhk.login.LoginBean;
+import com.zhk.main.TeacherBean;
 import com.zhk.panel.student.subject.SubjectBean;
 import com.zhk.panel.teacher.info.student.ComboBoxEditor;
 
@@ -28,9 +29,12 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
     private JTable table;
     private JPopupMenu popupMenu;
 
+    private LoginBean loginBean;
+
     public EditSubjectPanel(LoginBean loginBean) {
         initView();
         createPopupMenu();
+        this.loginBean = loginBean;
         presenter.attachView(this);
         presenter.select(loginBean);
         // 注册事件监听器
@@ -88,6 +92,9 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
             SubjectBean subjectBean = new SubjectBean();
             subjectBean.setId(0);
             subjectBean.setState(Config.UNCHANGED_INFO);
+            TeacherBean teacherBean = new TeacherBean();
+            teacherBean.setNumber(loginBean.getAccount());
+            subjectBean.setTeacherBean(teacherBean);
             subjectBeans.add(subjectBean);
             table.updateUI();
         });

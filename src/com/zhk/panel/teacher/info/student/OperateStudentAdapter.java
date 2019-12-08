@@ -55,7 +55,7 @@ public class OperateStudentAdapter extends AbstractTableModel {
     public void setValueAt(Object object, int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                studentBeans.get(rowIndex).setId(Integer.parseInt((String) object));
+                studentBeans.get(rowIndex).setNumber((String) object);
                 break;
             case 1:
                 studentBeans.get(rowIndex).setName((String) object);
@@ -71,8 +71,8 @@ public class OperateStudentAdapter extends AbstractTableModel {
                 break;
             case 5:
                 String str = (String) object;
-                studentBeans.get(rowIndex).setGrade(Integer.parseInt(str.substring(0, 1)));
-                studentBeans.get(rowIndex).setClazz(Integer.parseInt(str.substring(2, 3)));
+                studentBeans.get(rowIndex).setGrade(Integer.parseInt(str.substring(0, 2)));
+                studentBeans.get(rowIndex).setClazz(Integer.parseInt(str.substring(2, 4)));
                 break;
             case 6:
                 studentBeans.get(rowIndex).setState((int) object);

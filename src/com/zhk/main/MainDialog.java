@@ -9,6 +9,7 @@ import com.zhk.panel.student.score.SelectScorePanel;
 import com.zhk.panel.student.subject.SelectSubjectPanel;
 import com.zhk.panel.teacher.check.CheckSubjectPanel;
 import com.zhk.panel.teacher.info.student.OperateStudentPanel;
+import com.zhk.panel.teacher.info.teacher.SelectTeacherDialog;
 import com.zhk.panel.teacher.subject.EditSubjectPanel;
 
 import javax.swing.*;
@@ -57,6 +58,7 @@ public class MainDialog extends JFrame {
         JMenu selectMenu = new JMenu("信息查询");
         JMenuItem showInfoMenuItem = new JMenuItem("教师基本信息查询");
         JMenuItem showStudentInfoMenuItem = new JMenuItem("学生基本信息查询");
+        showInfoMenuItem.addActionListener(event -> showTeacherInfo());
         showStudentInfoMenuItem.addActionListener(event -> showStudentInfo());
         selectMenu.add(showInfoMenuItem);
         selectMenu.add(showStudentInfoMenuItem);
@@ -71,11 +73,8 @@ public class MainDialog extends JFrame {
         graduateMenu.add(checkSubjectMenuItem);
 
         JMenu helpMenu = new JMenu("帮助");
-        JMenuItem aboutMenuItem = new JMenuItem("关于");
         JMenuItem exitLoginMenuItem = new JMenuItem("退出登录");
-        aboutMenuItem.addActionListener(event -> showAbout());
         exitLoginMenuItem.addActionListener(event -> exitLogin());
-        helpMenu.add(aboutMenuItem);
         helpMenu.add(exitLoginMenuItem);
 
         menuBar.add(selectMenu);
@@ -106,11 +105,8 @@ public class MainDialog extends JFrame {
         graduateMenu.add(selectSubjectMenuItem);
 
         JMenu helpMenu = new JMenu("帮助");
-        JMenuItem aboutMenuItem = new JMenuItem("关于");
         JMenuItem exitLoginMenuItem = new JMenuItem("退出登录");
-        aboutMenuItem.addActionListener(event -> showAbout());
         exitLoginMenuItem.addActionListener(event -> exitLogin());
-        helpMenu.add(aboutMenuItem);
         helpMenu.add(exitLoginMenuItem);
 
         menuBar.add(selectMenu);
@@ -123,10 +119,6 @@ public class MainDialog extends JFrame {
      * 公共界面显示方法
      ***************************************
      */
-    private void showAbout() {
-
-    }
-
     private void exitLogin() {
         if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "确认退出当前界面？", "退出登录", JOptionPane.YES_NO_OPTION)) {
             this.dispose();
@@ -170,6 +162,11 @@ public class MainDialog extends JFrame {
      * Teacher相关的界面显示方法
      * **********************************
      */
+    private void showTeacherInfo() {
+        SelectTeacherDialog dialog = new SelectTeacherDialog(loginBean);
+        dialog.setVisible(true);
+    }
+
     private void showStudentInfo() {
         mainPanel.removeAll();
         mainPanel.repaint();

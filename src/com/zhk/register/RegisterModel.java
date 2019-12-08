@@ -45,11 +45,11 @@ public class RegisterModel {
             emailBean.setDate(new Date());
             if (type == Config.REGISTER_DIALOG) {
                 emailBean.setSubject("注册账号验证码");
-                emailBean.setContent("用户" + account + "：\n\t您好！\n\t您正在使用“毕业课题管理系统”，您正在注册账号，现在是验证您的身份是否合法。\n\t您的验证码是 "
+                emailBean.setContent("尊敬的用户" + account + "：\n\t您好！\n\t您正在使用“毕业课题管理系统”，您正在注册账号，现在是验证您的身份是否合法。\n\t您的验证码是 "
                         + verifyCode + " ，请不要将此验证码告知他人。\n\t此邮件为系统发送，请不要回复！\n谢谢！");
             } else if (type == Config.FORGET_PASSWORD_DIALOG) {
                 emailBean.setSubject("忘记密码验证码");
-                emailBean.setContent("用户" + account + "：\n\t您好！\n\t您正在使用“毕业课题管理系统”，您正在更改密码，现在是验证您的身份是否合法。\n\t您的验证码是 "
+                emailBean.setContent("尊敬的用户" + account + "：\n\t您好！\n\t您正在使用“毕业课题管理系统”，您正在更改密码，现在是验证您的身份是否合法。\n\t您的验证码是 "
                         + verifyCode + " ，请不要将此验证码告知他人。\n\t此邮件为系统发送，请不要回复！\n谢谢！");
             }
 

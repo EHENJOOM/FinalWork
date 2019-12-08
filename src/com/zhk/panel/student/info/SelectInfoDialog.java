@@ -19,14 +19,20 @@ public class SelectInfoDialog extends JFrame implements SelectInfoView {
     private JLabel academyText;
     private JLabel clazzText;
 
-    private SelectInfoPresenter presenter = new SelectInfoPresenter();
+    private SelectInfoPresenter presenter;
 
     public SelectInfoDialog(LoginBean loginBean) {
-        setTitle("学生基本信息");
-        setLocationRelativeTo(null);
-        setContentPane(contentPanel);
+        initView();
+        presenter = new SelectInfoPresenter();
         presenter.attachView(this);
         presenter.select(loginBean);
+    }
+
+    private void initView() {
+        setTitle("学生基本信息");
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        setContentPane(contentPanel);
     }
 
     @Override
@@ -38,7 +44,6 @@ public class SelectInfoDialog extends JFrame implements SelectInfoView {
             academyText.setText(studentBean.getAcademy());
             majorText.setText(studentBean.getMajor());
             clazzText.setText(String.format("%02d", studentBean.getGrade()) + String.format("%02d", studentBean.getClazz()));
-            pack();
         });
     }
 }

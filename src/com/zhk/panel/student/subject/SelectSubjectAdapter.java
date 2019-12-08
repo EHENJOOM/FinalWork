@@ -59,7 +59,7 @@ public class SelectSubjectAdapter extends AbstractTableModel {
         // 当前为操作列
         if (columnIndex == OPERATE_COLUMN) {
             // 当前列表一个课题都未选或当前是已选课题行，即可对按钮进行操作
-            return selectedId == -1 || selectedId == subjectBeans.get(rowIndex).getId();
+            return selectedId == -1 || (selectedId == subjectBeans.get(rowIndex).getId() && subjectBeans.get(rowIndex).getState() != Config.ACCEPTED_SUBJECT);
         }
         return false;
     }

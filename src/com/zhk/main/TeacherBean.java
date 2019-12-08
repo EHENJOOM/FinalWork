@@ -7,6 +7,9 @@ package com.zhk.main;
  */
 public class TeacherBean {
 
+    // 教师信息唯一标识
+    private int id;
+
     // 教师姓名
     private String name;
 
@@ -21,6 +24,14 @@ public class TeacherBean {
 
     // 教师所属学院
     private String ofAcademy;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNumber() {
         return number;

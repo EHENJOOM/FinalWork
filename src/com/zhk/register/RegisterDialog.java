@@ -69,12 +69,15 @@ public class RegisterDialog extends JFrame implements RegisterView {
 
             if (account.isEmpty()) {
                 showMessage("账号不能为空！");
+                return;
             }
             if (verify.isEmpty()) {
                 showMessage("验证码不能为空！");
+                return;
             }
             if (password.isEmpty()) {
                 showMessage("密码不能为空！");
+                return;
             }
 
             presenter.verify(type, verify, new LoginBean(account, password, status));

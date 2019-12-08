@@ -87,6 +87,9 @@ public class Config {
      */
     public static String WANGYI_AIL_SUFFIX = "@163.com";
 
+    /**
+     * 学院配置
+     */
     public static String[] ACADEMY = new String[]{null, "化学工程学院", "材料科学与工程学院", "机电工程学院", "信息科技与技术学院",
         "经济管理学院", "化学学院", "数理学院", "文法学院", "生命科学与技术学院"};
 }
