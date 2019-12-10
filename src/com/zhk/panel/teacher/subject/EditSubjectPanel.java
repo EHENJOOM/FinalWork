@@ -47,7 +47,7 @@ public class EditSubjectPanel extends JPanel implements EditSubjectView, EventLi
         JScrollPane scrollPane = new JScrollPane();
         adapter = new EditSubjectAdapter();
         table = new JTable(adapter);
-        table.getColumnModel().getColumn(1).setCellEditor(new ComboBoxEditor(Config.ACADEMY));
+        table.getColumnModel().getColumn(1).setCellEditor(new ComboBoxEditor(Config.ACADEMY_STRINGS));
         table.getColumnModel().getColumn(6).setCellEditor(new EditButtonEditor());
         table.getColumnModel().getColumn(6).setCellRenderer(new EditButtonRender());
         scrollPane.setViewportView(table);

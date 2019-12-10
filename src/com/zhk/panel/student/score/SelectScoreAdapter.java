@@ -8,7 +8,7 @@ import java.util.List;
  * @date 2019/11/24 16:52
  * @description 学生分数表适配器
  */
-public class ScoreAdapter extends AbstractTableModel {
+public class SelectScoreAdapter extends AbstractTableModel {
 
     private List<ScoreBean> scoreBeans;
 

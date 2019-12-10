@@ -32,9 +32,15 @@ public class DefaultConnectionPool implements ConnectionPool {
      */
     private final LinkedList<Connection> pool = new LinkedList<>();
 
-    private String SQLDriver = "com.mysql.cj.jdbc.Driver";
+    /**
+     * jdbc驱动
+     */
+    private static final String SQLDriver = "com.mysql.cj.jdbc.Driver";
 
-    private String url = "jdbc:mysql://localhost/final_work?user=root&password=123456&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT";
+    /**
+     * 连接mysql的配置url
+     */
+    private static final String url = "jdbc:mysql://localhost/final_work?user=root&password=123456&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT";
 
     private int connectionCount = 0;
 
@@ -52,17 +58,23 @@ public class DefaultConnectionPool implements ConnectionPool {
         initConnection(num);
     }
 
+    /**
+     * 创建连接
+     * @param num 连接数量
+     */
     private void initConnection(int num) {
         for (int i = 0; i < num; ++i) {
             try {
                 Class.forName(SQLDriver);
                 Connection connection = DriverManager.getConnection(url);
-                if (null != connection) {
-                    pool.add(connection);
-                    ++connectionCount;
+                synchronized (pool) {
+                    if (null != connection) {
+                        pool.add(connection);
+                        ++connectionCount;
+                    }
                 }
             } catch (SQLException | ClassNotFoundException e) {
-
+                throw new IllegalArgumentException("数据库连接创建失败！");
             }
         }
     }

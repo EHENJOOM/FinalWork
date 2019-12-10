@@ -52,7 +52,7 @@ public class OperateStudentPanel extends JPanel implements OperateStudentView, E
         String[] major = new String[]{"信息管理与信息系统", "会计", "物流", "财务管理", "国际贸易"};
         table.getColumnModel().getColumn(2).setCellEditor(new ComboBoxEditor(new String[]{"男", "女"}));
         table.getColumnModel().getColumn(3).setCellEditor(new ComboBoxEditor(major));
-        table.getColumnModel().getColumn(4).setCellEditor(new ComboBoxEditor(Config.ACADEMY));
+        table.getColumnModel().getColumn(4).setCellEditor(new ComboBoxEditor(Config.ACADEMY_STRINGS));
         table.getColumnModel().getColumn(6).setCellEditor(new EditButtonEditor());
         table.getColumnModel().getColumn(6).setCellRenderer(new EditButtonRender());
 
@@ -70,7 +70,7 @@ public class OperateStudentPanel extends JPanel implements OperateStudentView, E
         nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         numberLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        for (String item : Config.ACADEMY) {
+        for (String item : Config.ACADEMY_STRINGS) {
             academyCombo.addItem(item);
         }
 

@@ -28,12 +28,13 @@ public class LoginDialog extends JFrame implements LoginView {
     private JLabel registerLabel;
     private JLabel forgetLabel;
 
-    private LoginPresenter loginPresenter = new LoginPresenter();
+    private LoginPresenter presenter;
 
     public LoginDialog() {
         initView();
+        presenter = new LoginPresenter();
         // 逻辑处理器绑定视图
-        loginPresenter.attachView(this);
+        presenter.attachView(this);
     }
 
     /**
@@ -62,7 +63,7 @@ public class LoginDialog extends JFrame implements LoginView {
                 return;
             }
 
-            loginPresenter.login(new LoginBean(account, password));
+            presenter.login(new LoginBean(account, password));
         });
 
         registerLabel.addMouseListener(new MouseAdapter() {

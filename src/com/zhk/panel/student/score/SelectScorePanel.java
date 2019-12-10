@@ -15,16 +15,17 @@ import java.util.stream.Collectors;
 public class SelectScorePanel extends JPanel implements SelectScoreView {
 
     private JTable table;
-    private ScoreAdapter adapter;
+    private SelectScoreAdapter adapter;
 
     private JTextField teacherText;
     private JTextField courseText;
 
     private List<ScoreBean> scoreBeans;
-    private SelectScorePresenter presenter = new SelectScorePresenter();
+    private SelectScorePresenter presenter;
 
     public SelectScorePanel(LoginBean loginBean) {
         initView();
+        presenter = new SelectScorePresenter();
         presenter.attachView(this);
         presenter.select(loginBean);
     }
@@ -32,7 +33,7 @@ public class SelectScorePanel extends JPanel implements SelectScoreView {
     private void initView() {
         setLayout(new BorderLayout());
         JScrollPane scrollPane = new JScrollPane();
-        adapter = new ScoreAdapter();
+        adapter = new SelectScoreAdapter();
         table = new JTable(adapter);
         scrollPane.setViewportView(table);
 

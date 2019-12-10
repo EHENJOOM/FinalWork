@@ -101,9 +101,9 @@ public class CheckSubjectAdapter extends AbstractTableModel {
                     return "未选";
                 }
             case 13:
-                return "接收";
+                return Config.ACCEPT_STRING;
             case 14:
-                return "拒绝";
+                return Config.REFUSE_STRING;
             default:
                 return null;
         }

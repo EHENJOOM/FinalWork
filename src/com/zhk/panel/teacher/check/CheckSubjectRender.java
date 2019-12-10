@@ -1,5 +1,6 @@
 package com.zhk.panel.teacher.check;
 
+import com.zhk.constant.Config;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
@@ -15,18 +16,18 @@ public class CheckSubjectRender extends JButton implements TableCellRenderer {
 
     public CheckSubjectRender(String title) {
         setText(title);
-        if ("接收".equals(title)) {
+        if (Config.ACCEPT_STRING.equals(title)) {
             setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.lightBlue));
-        } else if ("拒绝".equals(title)) {
+        } else if (Config.REFUSE_STRING.equals(title)) {
             setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.red));
         }
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        if ("接收".equals(value)) {
+        if (Config.ACCEPT_STRING.equals(value)) {
             setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.lightBlue));
-        } else if ("拒绝".equals(value)){
+        } else if (Config.REFUSE_STRING.equals(value)){
             setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.red));
         }
         return this;

@@ -43,10 +43,10 @@ public class CheckSubjectPanel extends JPanel implements CheckSubjectView, Event
         table = new JTable(adapter);
         scrollPane.setViewportView(table);
 
-        table.getColumnModel().getColumn(13).setCellRenderer(new CheckSubjectRender("接收"));
-        table.getColumnModel().getColumn(13).setCellEditor(new CheckSubjectEditor("接收"));
-        table.getColumnModel().getColumn(14).setCellRenderer(new CheckSubjectRender("拒绝"));
-        table.getColumnModel().getColumn(14).setCellEditor(new CheckSubjectEditor("拒绝"));
+        table.getColumnModel().getColumn(13).setCellRenderer(new CheckSubjectRender(Config.ACCEPT_STRING));
+        table.getColumnModel().getColumn(13).setCellEditor(new CheckSubjectEditor(Config.ACCEPT_STRING));
+        table.getColumnModel().getColumn(14).setCellRenderer(new CheckSubjectRender(Config.REFUSE_STRING));
+        table.getColumnModel().getColumn(14).setCellEditor(new CheckSubjectEditor(Config.REFUSE_STRING));
 
         JPanel headerPanel = new JPanel(new GridLayout(1, 5, 10, 20));
         JLabel ofAcademyLabel = new JLabel("课题所属学院");
@@ -55,7 +55,7 @@ public class CheckSubjectPanel extends JPanel implements CheckSubjectView, Event
         studentAcademyCombo = new JComboBox<>();
         JButton filterButton = new JButton("查找");
 
-        for (String item : Config.ACADEMY) {
+        for (String item : Config.ACADEMY_STRINGS) {
             ofAcademyCombo.addItem(item);
             studentAcademyCombo.addItem(item);
         }

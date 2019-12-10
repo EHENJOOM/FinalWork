@@ -34,16 +34,6 @@ public class EmailBean {
      */
     private Date date;
 
-    public EmailBean() {}
-
-    public EmailBean(String receiveAccount,String suffix, String subject, String content, Date date) {
-        this.receiveAccount = receiveAccount;
-        this.subject = suffix;
-        this.subject = subject;
-        this.content = content;
-        this.date = date;
-    }
-
     public Date getDate() {
         return date;
     }

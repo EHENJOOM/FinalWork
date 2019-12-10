@@ -12,7 +12,7 @@ import java.util.Properties;
  * @date 2019/11/26 18:58
  * @description email发送器
  */
-public class DefaultEmailSender implements EmailSender {
+public class DefaultEmailSender implements MessageSender {
 
     private Message message;
 
@@ -20,6 +20,7 @@ public class DefaultEmailSender implements EmailSender {
 
     @Override
     public void init() {
+        // 配置邮件发送的属性
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
         props.setProperty("mail.smtp.host", Config.SEND_EMAIL_SMTP_HOST);
@@ -30,9 +31,6 @@ public class DefaultEmailSender implements EmailSender {
 
         // 根据配置创建会话对象, 用于和邮件服务器交互
         session = Session.getDefaultInstance(props);
-
-        // 设置为debug模式, 可以查看详细的发送 log
-        session.setDebug(true);
     }
 
     @Override
@@ -48,13 +46,12 @@ public class DefaultEmailSender implements EmailSender {
 
     @Override
     public void sendMessage() throws MessagingException {
-        // 根据 Session 获取邮件传输对象
+        // 根据Session获取邮件传输对象
         Transport transport = session.getTransport();
-        // 使用 邮箱账号 和 密码 连接邮件服务器, 这里认证的邮箱必须与 message 中的发件人邮箱一致, 否则会报错
+        // 使用邮箱账号和密码连接邮件服务器
         transport.connect(Config.SEND_EMAIL_ACCOUNT, Config.SEND_EMAIL_PASSWORD);
         // 发送邮件
         transport.sendMessage(message, message.getAllRecipients());
-
         transport.close();
         message = null;
     }

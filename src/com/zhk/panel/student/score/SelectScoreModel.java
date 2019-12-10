@@ -59,7 +59,11 @@ public class SelectScoreModel {
 
                 statement.close();
                 resultSet.close();
-                selectTeacher(connection, list, baseCallBack);
+                if (list.size() == 0) {
+                    baseCallBack.onSucceed(list);
+                } else {
+                    selectTeacher(connection, list, baseCallBack);
+                }
             } catch (SQLException e) {
                 baseCallBack.onFailed("数据读取失败！");
             }

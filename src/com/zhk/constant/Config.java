@@ -58,38 +58,48 @@ public class Config {
     public static final int FORGET_PASSWORD_DIALOG = 10;
 
     /**
-     * 发件人的邮箱地址和密码
+     * 接收
      */
-    public static String SEND_EMAIL_ACCOUNT = "884101977@qq.com";
+    public static final String ACCEPT_STRING = "接收";
 
     /**
-     * 授权码
+     * 拒绝
      */
-    public static String SEND_EMAIL_PASSWORD = "onmdbvtpkltrbdja";
-
-    /**
-     * 发件人邮箱的 SMTP 服务器地址
-     */
-    public static String SEND_EMAIL_SMTP_HOST = "smtp.qq.com";
-
-    /**
-     * BUCT收件人邮箱后缀，仅支持BUCTers注册
-     */
-    public static String BUCT_MAIL_SUFFIX = "@mail.buct.edu.cn";
-
-    /**
-     * QQ邮箱后缀
-     */
-    public static String QQ_MAIL_SUFFIX = "@qq.com";
-
-    /**
-     * 网易邮箱后缀
-     */
-    public static String WANGYI_AIL_SUFFIX = "@163.com";
+    public static final String REFUSE_STRING = "拒绝";
 
     /**
      * 学院配置
      */
-    public static String[] ACADEMY = new String[]{null, "化学工程学院", "材料科学与工程学院", "机电工程学院", "信息科技与技术学院",
-        "经济管理学院", "化学学院", "数理学院", "文法学院", "生命科学与技术学院"};
+    public static final String[] ACADEMY_STRINGS = new String[]{null, "化学工程学院", "材料科学与工程学院", "机电工程学院", "信息科技与技术学院",
+            "经济管理学院", "化学学院", "数理学院", "文法学院", "生命科学与技术学院"};
+
+    /**
+     * 发件人的邮箱地址和密码
+     */
+    public static final String SEND_EMAIL_ACCOUNT = "884101977@qq.com";
+
+    /**
+     * 授权码
+     */
+    public static final String SEND_EMAIL_PASSWORD = "onmdbvtpkltrbdja";
+
+    /**
+     * 发件人邮箱的 SMTP 服务器地址
+     */
+    public static final String SEND_EMAIL_SMTP_HOST = "smtp.qq.com";
+
+    /**
+     * BUCT收件人邮箱后缀，默认邮件仅支持北化邮箱注册。可根据需要定制第三方邮件发送器
+     */
+    public static final String BUCT_MAIL_SUFFIX = "@mail.buct.edu.cn";
+
+    /**
+     * QQ邮箱后缀
+     */
+    public static final String QQ_MAIL_SUFFIX = "@qq.com";
+
+    /**
+     * 网易邮箱后缀
+     */
+    public static final String WANGYI_AIL_SUFFIX = "@163.com";
 }

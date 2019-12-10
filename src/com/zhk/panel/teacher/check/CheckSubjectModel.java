@@ -160,9 +160,12 @@ public class CheckSubjectModel {
                 baseCallBack.onFailed("该课题总可接收人数已到达最大值！");
                 return;
             }
+            // 已接收人数加一，待确认人数减一
             matchBean.getSubjectBean().setAcceptedNum(matchBean.getSubjectBean().getAcceptedNum() + 1);
+            matchBean.getSubjectBean().setConfirmingNum(matchBean.getSubjectBean().getConfirmingNum() - 1);
             accept(matchBean, baseCallBack);
         } else if (Events.REFUSE_STUDENT.equals(topic)) {
+            // 待确认人数减一
             matchBean.getSubjectBean().setConfirmingNum(matchBean.getSubjectBean().getConfirmingNum() - 1);
             refuse(matchBean, baseCallBack);
         }
@@ -176,7 +179,7 @@ public class CheckSubjectModel {
     private void refuse(MatchBean matchBean, BaseCallBack<MatchBean> baseCallBack) {
         ThreadPoolEnum.getInstance().execute(() -> {
             Connection connection = ConnectionPoolEnum.getInstance().getConnection();
-            String sql = "delete stu_sub where id = ?";
+            String sql = "delete from stu_sub where id = ?";
 
             try {
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -189,6 +192,7 @@ public class CheckSubjectModel {
 
                 updateSubject(Events.REFUSE_STUDENT, connection, matchBean, baseCallBack);
             } catch (SQLException e) {
+                e.printStackTrace();
                 baseCallBack.onFailed("数据库连接失败！");
             }
         });

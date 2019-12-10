@@ -8,7 +8,7 @@ import javax.mail.MessagingException;
  *              然后再调用{@code setEmailContent(EmailBean)}方法进行邮件内容的配置，最后再调用{@code sendMessage()}方法发送邮件。
  *              若无法确定当前邮件发送器是否已初始化，可以调用{@code isInitial()}方法判断当前发送器是否已初始化。
  */
-public interface EmailSender {
+public interface MessageSender {
 
     /**
      * 初始化配置信息，只需要初始化一次即可

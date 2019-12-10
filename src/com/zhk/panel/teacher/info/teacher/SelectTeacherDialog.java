@@ -29,9 +29,9 @@ public class SelectTeacherDialog extends JFrame implements SelectTeacherView {
 
     private void initView() {
         setTitle("教师基本信息");
-        setLocationRelativeTo(null);
         setContentPane(mainPanel);
         setSize(400, 250);
+        setLocationRelativeTo(null);
     }
 
     @Override

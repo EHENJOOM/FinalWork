@@ -17,7 +17,7 @@ public interface ConnectionPool {
 
     /**
      * 把connection放回数据库连接池中
-     * @param connection connection
+     * @param connection 数据库连接
      */
     void putBack(Connection connection);
 

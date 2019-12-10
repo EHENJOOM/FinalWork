@@ -63,7 +63,7 @@ public class SelectSubjectPanel extends JPanel implements SelectSubjectView, Eve
         selectButton.setHorizontalAlignment(SwingConstants.CENTER);
 
         selectButton.addActionListener(event -> filter());
-        for (String item : Config.ACADEMY) {
+        for (String item : Config.ACADEMY_STRINGS) {
             ofAcademyCombo.addItem(item);
         }
 

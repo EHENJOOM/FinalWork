@@ -2,7 +2,7 @@ package com.zhk.register;
 
 import com.zhk.constant.Config;
 import com.zhk.db.ConnectionPoolEnum;
-import com.zhk.email.EmailSender;
+import com.zhk.email.MessageSender;
 import com.zhk.email.EmailSenderFactory;
 import com.zhk.login.LoginBean;
 import com.zhk.email.EmailBean;
@@ -54,10 +54,10 @@ public class RegisterModel {
             }
 
             try {
-                EmailSender emailSender = EmailSenderFactory.getDefaultEmailSender();
-                emailSender.init();
-                emailSender.setEmailContent(emailBean);
-                emailSender.sendMessage();
+                MessageSender messageSender = EmailSenderFactory.getDefaultEmailSender();
+                messageSender.init();
+                messageSender.setEmailContent(emailBean);
+                messageSender.sendMessage();
                 baseCallBack.onSucceed("验证码已发送，请前往您的邮箱查看！");
             } catch (Exception e) {
                 baseCallBack.onFailed("验证码发送失败，请稍后重试！");

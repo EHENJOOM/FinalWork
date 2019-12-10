@@ -21,6 +21,7 @@ public class RegisterDialog extends JFrame implements RegisterView {
     private JPanel contentPanel;
     private JRadioButton studentRadio;
     private JRadioButton teacherRadio;
+    private JButton backButton;
 
     private RegisterPresenter presenter = new RegisterPresenter();
 
@@ -29,9 +30,9 @@ public class RegisterDialog extends JFrame implements RegisterView {
     public RegisterDialog(int type) {
         setContentPane(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setSize(400, 300);
         initView(type);
+        setLocationRelativeTo(null);
         presenter.attachView(this);
     }
 
@@ -61,6 +62,11 @@ public class RegisterDialog extends JFrame implements RegisterView {
                 return;
             }
             presenter.sendVerifyCode(type, account);
+        });
+        backButton.addActionListener(event -> {
+            dispose();
+            LoginDialog dialog = new LoginDialog();
+            dialog.setVisible(true);
         });
         okButton.addActionListener(event -> {
             String account = accountTextField.getText();

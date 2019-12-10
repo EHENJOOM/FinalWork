@@ -45,6 +45,11 @@ public class ScoreBean {
      */
     private float point;
 
+    /**
+     * 课程状态
+     */
+    private int state;
+
     private TeacherBean teacherBean;
 
     public void setStudentBean(StudentBean studentBean) {
@@ -109,5 +114,13 @@ public class ScoreBean {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getState() {
+        return state;
     }
 }
