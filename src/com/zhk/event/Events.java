@@ -35,4 +35,19 @@ public class Events {
      * 拒绝该学生的课题请求
      */
     public static final String REFUSE_STUDENT = "refuse_student";
+
+    /**
+     * 管理员修改登录账号信息
+     */
+    public static final String ADMIN_CHANGE_LOGIN = "admin_change_login";
+
+    /**
+     * 管理员修改教师信息
+     */
+    public static final String ADMIN_CHANGE_TEACHER = "admin_change_teacher";
+
+    /**
+     * 管理员修改学生信息
+     */
+    public static final String ADMIN_CHANGE_STUDENT = "admin_change_student";
 }

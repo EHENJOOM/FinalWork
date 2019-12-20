@@ -1,6 +1,5 @@
 package com.zhk.thread;
 
-import javax.swing.plaf.PanelUI;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;

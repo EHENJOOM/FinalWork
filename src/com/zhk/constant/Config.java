@@ -18,6 +18,11 @@ public class Config {
     public static final int TEACHER_LOGIN = 1;
 
     /**
+     * 超级管理员身份登录
+     */
+    public static final int ADMIN_LOGIN = 2;
+
+    /**
      * 该课题处于未选状态
      */
     public static final int UNSELECTED_SUBJECT = 2;
@@ -68,10 +73,20 @@ public class Config {
     public static final String REFUSE_STRING = "拒绝";
 
     /**
+     * 关于作者
+     */
+    public static final String ABOUT_ME_STRING = "\t关于作者：北京化工大学 信管1701 赵洪苛\t";
+
+    /**
      * 学院配置
      */
     public static final String[] ACADEMY_STRINGS = new String[]{null, "化学工程学院", "材料科学与工程学院", "机电工程学院", "信息科技与技术学院",
             "经济管理学院", "化学学院", "数理学院", "文法学院", "生命科学与技术学院"};
+
+    /**
+     * 教师职称
+     */
+    public static final String[] JOB_TITLE_STRINGS = new String[]{"教授", "副教授", "见习副教授", "教授助理", "讲师"};
 
     /**
      * 发件人的邮箱地址和密码

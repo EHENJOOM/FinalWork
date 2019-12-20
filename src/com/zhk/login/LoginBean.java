@@ -5,7 +5,10 @@ package com.zhk.login;
  * @date 2019/11/21 17:35
  * @description 登录账户数据实体类
  */
-public class LoginBean {
+public class LoginBean implements Cloneable {
+
+    // 用户唯一标识
+    private int id;
 
     // 用户账户名
     private String account;
@@ -15,6 +18,9 @@ public class LoginBean {
 
     // 用户类型
     private int type;
+
+    // 当前数据状态
+    private int state;
 
     public LoginBean() {}
 
@@ -51,6 +57,29 @@ public class LoginBean {
 
     public String getAccount() {
         return account;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    @Override
+    public Object clone() {
+        LoginBean loginBean = new LoginBean(this.account, this.password, this.type);
+        loginBean.setId(this.id);
+        return loginBean;
     }
 
     @Override

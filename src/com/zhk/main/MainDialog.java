@@ -3,6 +3,8 @@ package com.zhk.main;
 import com.zhk.constant.Config;
 import com.zhk.login.LoginBean;
 import com.zhk.login.LoginDialog;
+import com.zhk.panel.admin.login.ManageLoginPanel;
+import com.zhk.panel.admin.teacher.ManageTeacherPanel;
 import com.zhk.panel.student.exam.SelectExamPanel;
 import com.zhk.panel.student.info.SelectInfoDialog;
 import com.zhk.panel.student.score.SelectScorePanel;
@@ -29,6 +31,7 @@ public class MainDialog extends JFrame {
     public MainDialog(LoginBean loginBean) {
         this.loginBean = loginBean;
         initView();
+        addAbout();
     }
 
     /**
@@ -47,7 +50,15 @@ public class MainDialog extends JFrame {
         } else if (loginBean.getType() == Config.STUDENT_LOGIN) {
             setTitle("学生客户端");
             initStudentMenuBar();
+        } else if (loginBean.getType() == Config.ADMIN_LOGIN) {
+            setTitle("超级管理员客户端");
+            initAdminMenuBar();
         }
+    }
+
+    private void addAbout() {
+        JLabel about = new JLabel(Config.ABOUT_ME_STRING);
+        mainPanel.add(about, BorderLayout.SOUTH);
     }
 
     /**
@@ -115,6 +126,32 @@ public class MainDialog extends JFrame {
         setJMenuBar(menuBar);
     }
 
+    /**
+     * 初始化用于管理员的MenuBar
+     */
+    private void initAdminMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu peopleMenu = new JMenu("人员管理");
+        JMenuItem showLoginMenuItem = new JMenuItem("登录信息管理");
+        JMenuItem showStudentItem = new JMenuItem("学生信息管理");
+        JMenuItem showTeacherMenuItem = new JMenuItem("教师信息管理");
+        showLoginMenuItem.addActionListener(event -> showLoginInfo());
+        showStudentItem.addActionListener(event -> showStudent());
+        showTeacherMenuItem.addActionListener(event -> showTeacher());
+        peopleMenu.add(showLoginMenuItem);
+        peopleMenu.add(showStudentItem);
+        peopleMenu.add(showTeacherMenuItem);
+
+        JMenu helpMenu = new JMenu("帮助");
+        JMenuItem exitLoginMenuItem = new JMenuItem("退出登录");
+        exitLoginMenuItem.addActionListener(event -> exitLogin());
+        helpMenu.add(exitLoginMenuItem);
+
+        menuBar.add(peopleMenu);
+        menuBar.add(helpMenu);
+        setJMenuBar(menuBar);
+    }
+
     /***************************************
      * 公共界面显示方法
      ***************************************
@@ -135,6 +172,7 @@ public class MainDialog extends JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.add(new SelectExamPanel(loginBean), BorderLayout.CENTER);
+        addAbout();
         mainPanel.revalidate();
     }
 
@@ -142,6 +180,7 @@ public class MainDialog extends JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.add(new SelectScorePanel(loginBean), BorderLayout.CENTER);
+        addAbout();
         mainPanel.revalidate();
     }
 
@@ -155,6 +194,7 @@ public class MainDialog extends JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.add(new SelectSubjectPanel(loginBean), BorderLayout.CENTER);
+        addAbout();
         mainPanel.revalidate();
     }
 
@@ -171,6 +211,7 @@ public class MainDialog extends JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.add(new OperateStudentPanel(), BorderLayout.CENTER);
+        addAbout();
         mainPanel.revalidate();
     }
 
@@ -178,6 +219,7 @@ public class MainDialog extends JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.add(new EditSubjectPanel(loginBean), BorderLayout.CENTER);
+        addAbout();
         mainPanel.revalidate();
     }
 
@@ -185,6 +227,35 @@ public class MainDialog extends JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.add(new CheckSubjectPanel(loginBean), BorderLayout.CENTER);
+        addAbout();
+        mainPanel.revalidate();
+    }
+
+    /**************************************
+     * 超级管理员相关的界面显示方法
+     * ************************************
+     */
+    private void showLoginInfo() {
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        mainPanel.add(new ManageLoginPanel(), BorderLayout.CENTER);
+        addAbout();
+        mainPanel.revalidate();
+    }
+
+    private void showStudent() {
+        mainPanel.removeAll();
+        mainPanel.repaint();
+
+        addAbout();
+        mainPanel.revalidate();
+    }
+
+    private void showTeacher() {
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        mainPanel.add(new ManageTeacherPanel(), BorderLayout.CENTER);
+        addAbout();
         mainPanel.revalidate();
     }
 

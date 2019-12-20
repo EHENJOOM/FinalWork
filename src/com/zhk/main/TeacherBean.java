@@ -5,7 +5,7 @@ package com.zhk.main;
  * @date 2019/11/23 18:15
  * @description 老师数据实体类
  */
-public class TeacherBean {
+public class TeacherBean implements Cloneable {
 
     // 教师信息唯一标识
     private int id;
@@ -24,6 +24,17 @@ public class TeacherBean {
 
     // 教师所属学院
     private String ofAcademy;
+
+    // 数据状态
+    private int state;
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 
     public int getId() {
         return id;
@@ -71,5 +82,18 @@ public class TeacherBean {
 
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+    }
+
+    @Override
+    public Object clone() {
+        TeacherBean teacherBean = new TeacherBean();
+        teacherBean.setId(this.id);
+        teacherBean.setNumber(this.number);
+        teacherBean.setName(this.name);
+        teacherBean.setSex(this.sex);
+        teacherBean.setJobTitle(this.jobTitle);
+        teacherBean.setOfAcademy(this.ofAcademy);
+        teacherBean.setState(this.state);
+        return teacherBean;
     }
 }

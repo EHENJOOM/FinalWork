@@ -35,12 +35,12 @@ public class DefaultConnectionPool implements ConnectionPool {
     /**
      * jdbc驱动
      */
-    private static final String SQLDriver = "com.mysql.cj.jdbc.Driver";
+    private static final String SQL_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     /**
      * 连接mysql的配置url
      */
-    private static final String url = "jdbc:mysql://localhost/final_work?user=root&password=123456&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT";
+    private static final String URL = "jdbc:mysql://localhost/final_work?user=root&password=123456&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT";
 
     private int connectionCount = 0;
 
@@ -65,8 +65,8 @@ public class DefaultConnectionPool implements ConnectionPool {
     private void initConnection(int num) {
         for (int i = 0; i < num; ++i) {
             try {
-                Class.forName(SQLDriver);
-                Connection connection = DriverManager.getConnection(url);
+                Class.forName(SQL_DRIVER);
+                Connection connection = DriverManager.getConnection(URL);
                 synchronized (pool) {
                     if (null != connection) {
                         pool.add(connection);
