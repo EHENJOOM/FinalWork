@@ -78,7 +78,7 @@ public class Config {
     public static final String ABOUT_ME_STRING = "\t关于作者：北京化工大学 信管1701 赵洪苛\t";
 
     /**
-     * 学院配置
+     * 学院配置，其中null代表全部学院，这是用于筛选信息
      */
     public static final String[] ACADEMY_STRINGS = new String[]{null, "化学工程学院", "材料科学与工程学院", "机电工程学院", "信息科技与技术学院",
             "经济管理学院", "化学学院", "数理学院", "文法学院", "生命科学与技术学院"};

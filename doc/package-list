@@ -5,6 +5,9 @@ com.zhk.event
 com.zhk.login
 com.zhk.main
 com.zhk.mvp
+com.zhk.panel.admin.login
+com.zhk.panel.admin.student
+com.zhk.panel.admin.teacher
 com.zhk.panel.student.exam
 com.zhk.panel.student.info
 com.zhk.panel.student.score

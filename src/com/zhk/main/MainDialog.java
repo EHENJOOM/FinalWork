@@ -4,6 +4,7 @@ import com.zhk.constant.Config;
 import com.zhk.login.LoginBean;
 import com.zhk.login.LoginDialog;
 import com.zhk.panel.admin.login.ManageLoginPanel;
+import com.zhk.panel.admin.student.ManageStudentPanel;
 import com.zhk.panel.admin.teacher.ManageTeacherPanel;
 import com.zhk.panel.student.exam.SelectExamPanel;
 import com.zhk.panel.student.info.SelectInfoDialog;
@@ -246,7 +247,7 @@ public class MainDialog extends JFrame {
     private void showStudent() {
         mainPanel.removeAll();
         mainPanel.repaint();
-
+        mainPanel.add(new ManageStudentPanel(), BorderLayout.CENTER);
         addAbout();
         mainPanel.revalidate();
     }
